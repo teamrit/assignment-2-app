@@ -4,7 +4,7 @@ import './App.css';
 import { Provider } from "react-redux";
 import {LandingPage} from "./components/landing.page.component";
 import {SignIn} from "./components/signin.component";
-import {SignUp} from "./components/signup.component";
+import SignUp from "./components/signup.component";
 import store from "./redux/store";
 
 function App() {
