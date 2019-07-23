@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
+import { Provider } from "react-redux";
+import {LandingPage} from "./components/landing.page.component";
+import {SignIn} from "./components/signin.component";
+import {SignUp} from "./components/signup.component";
+import store from "./redux/store";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Route path="/" exact component={LandingPage} />
+        <Route path="/login/" component={SignIn} />
+        <Route path="/signup/" component={SignUp} />
     </div>
   );
 }
 
-export default App;
+const routedApp = () => (
+    <Provider store={store}>
+        <Router>
+            <App />
+        </Router>
+    </Provider>
+
+);
+
+export default routedApp;
