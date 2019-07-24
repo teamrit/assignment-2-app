@@ -91,7 +91,9 @@
 .card.h-70 {
   width: 400px;
 }
-
 .container input:checked ~ .checkmark {
   background-color: #59CD90;
+}
+.w-logo {
+  width: 40px;
 }
