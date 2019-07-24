@@ -1,1 +1,7 @@
 export const SIGN_UP_USER = "SIGN_UP_USER";
+export const SIGN_IN_USER = "SIGN_IN_USER";
+export const SIGN_UP_USER_FAIL = "SIGN_UP_USER_FAIL";
+export const SIGN_IN_USER_FAIL = "SIGN_IN_USER_FAIL";
+
+export const GET_INCIDENTS = "GET_INCIDENTS";
+export const GET_INCIDENTS_FAIL = "GET_INCIDENTS_FAIL";

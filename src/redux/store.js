@@ -1,16 +1,12 @@
-import { createStore } from "redux";
-import incidents from './reducers/incidents.reducer';
+import { createStore , applyMiddleware , compose , composeEn } from "redux";
 import rootReducer from "./reducers/index";
+import thunk from 'redux-thunk';
 
-const defaultState = {
-    incidents : {name:"asd"}
-};
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(
-    rootReducer,
-    defaultState,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+const store = createStore(rootReducer, /* preloadedState, */ composeEnhancers(
+    applyMiddleware(thunk),
+));
 
 window.store = store;
 
