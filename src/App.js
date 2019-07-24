@@ -6,6 +6,7 @@ import {LandingPage} from "./components/landing.page.component";
 import {SignIn} from "./components/signin.component";
 import SignUp from "./components/signup.component";
 import store from "./redux/store";
+import IncidentsList from "./components/incidents.component";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" exact component={LandingPage} />
         <Route path="/login/" component={SignIn} />
         <Route path="/signup/" component={SignUp} />
+        <Route path="/incidents/" component={IncidentsList} />
     </div>
   );
 }

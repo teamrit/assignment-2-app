@@ -1,4 +1,5 @@
 import React from 'react';
+import NavigationBar from "./navbar.component";
 
 export const LandingPage = () => {
     return (
