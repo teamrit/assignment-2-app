@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom"
 import image from "../incible-logo.png";
+import connect from "react-redux/es/connect/connect";
+import {signIn} from "../redux/actions/users.action";
 
 export class SignIn extends Component {
 
@@ -15,6 +17,12 @@ export class SignIn extends Component {
     onChange = key => (e) => {
         console.warn(e,key);
         this.setState({[key] : e.target.value})
+    };
+
+    signIn = (e) => {
+        e.preventDefault();
+        const {email,password,firstName,lastName} = this.state;
+        this.props.signInUser({email,password})
     };
 
     render() {
@@ -52,7 +60,7 @@ export class SignIn extends Component {
                                                     <input type="checkbox" className="form-check-input" id="exampleCheck1" />
                                                     <label className="form-check-label" htmlFor="exampleCheck1">&nbsp;Remember Me</label>
                                                 </div>
-                                                <button className="btn float-right login_btn bg-rumble brr text-white t-b">
+                                                <button className="btn float-right login_btn bg-rumble brr text-white t-b" onClick={this.signIn}>
                                                     Login <i className="fa fa-arrow-right"/>
                                                 </button>
                                             </form>
@@ -76,3 +84,5 @@ export class SignIn extends Component {
         );
     }
 }
+
+export default connect((state => state), {signInUser: signIn})(SignIn);

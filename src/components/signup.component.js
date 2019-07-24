@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import image from "../incible-logo.png";
 import {Link} from "react-router-dom";
+import { connect } from 'react-redux';
+import {signUpUser} from "../redux/actions/users.action";
 
 const SignUpInput = ({id,label="",keyForInput = "",...inputProps}) => (
     <div className="form-group">
@@ -17,7 +19,8 @@ export class SignUp extends Component {
             email: "",
             password: "",
             firstName: "",
-            lastName: ""
+            lastName: "",
+            confirmPassword: ""
         }
     }
 
@@ -30,10 +33,11 @@ export class SignUp extends Component {
         e.preventDefault();
         const {email,password,firstName,lastName} = this.state;
         console.warn(email,password,firstName,lastName)
+        console.log(this.props.signUpUser())
     };
 
     render() {
-        const {email,password,firstName,lastName} = this.state;
+        const {email,password,firstName,lastName,confirmPassword} = this.state;
         return (
             <div className="mh-100 bg-jazz">
                 <div className="mh-100 bg-ripple aligner">
@@ -83,6 +87,14 @@ export class SignUp extends Component {
                                                     onChange={this.onChange("password")}
                                                     value={password}
                                                 />
+                                                <SignUpInput
+                                                    label={"Confirm password"}
+                                                    id={"su-cpassword"}
+                                                    type={"password"}
+                                                    placeholder={"Confirm Password"}
+                                                    onChange={this.onChange("confirmPassword")}
+                                                    value={confirmPassword}
+                                                />
                                                 <div className="form-check">
                                                     <input type="checkbox" className="form-check-input" id="exampleCheck1" />
                                                     <label className="form-check-label" htmlFor="exampleCheck1">&nbsp;Remember Me</label>
@@ -110,3 +122,5 @@ export class SignUp extends Component {
         );
     }
 }
+
+export default connect((state => state), {signUpUser: signUpUser})(SignUp);
