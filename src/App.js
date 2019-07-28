@@ -7,14 +7,19 @@ import {SignIn} from "./components/signin.component";
 import SignUp from "./components/signup.component";
 import store from "./redux/store";
 import IncidentsList from "./components/incidents.component";
+import IncidentForm from "./components/incidentsForm.component";
+import axios from "axios";
 
 function App() {
+
   return (
     <div className="App">
         <Route path="/" exact component={LandingPage} />
         <Route path="/login/" component={SignIn} />
         <Route path="/signup/" component={SignUp} />
-        <Route path="/incidents/" component={IncidentsList} />
+        <Route path="/incidents/" exact component={IncidentsList} />
+        <Route path="/incidents/new" exact component={IncidentForm} />
+        
     </div>
   );
 }
