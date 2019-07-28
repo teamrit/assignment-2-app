@@ -102,3 +102,35 @@
 .incident-form{
   margin-top: 7vh;
 }
+
+.modal-title{
+  padding: 5%;
+  color: #70AFE6;
+}
+
+.modal-content{
+  border: solid 5px #1F3140;
+  background-color: #1F3140;
+}
+
+.modal-body{
+  padding: 5%;
+}
+
+body{
+  background-color: #3E6180;
+}
+
+.btn{
+  background-color: #5E92BF;
+  color: #1F3140;
+}
+
+.form-control{
+  background-color: #3E6180;
+  border: solid 2px #1F3140;
+}
+
+input{
+  color: white;
+}

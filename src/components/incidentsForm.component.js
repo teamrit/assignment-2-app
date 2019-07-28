@@ -1,9 +1,12 @@
 import React, { Component } from "react";
+import {connect} from "react-redux";
+import {createIncident} from "../redux/actions/incidents.action"; 
 import Navbar from "./navbar.component";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button"
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
-export default class IncidentForm extends Component{
+class IncidentForm extends Component{
 
     constructor(props) {
         super(props);
@@ -17,8 +20,9 @@ export default class IncidentForm extends Component{
         this.setState({[key]: e.target.value})
     }
 
-    onSubmit = (e) => {
-
+    createIncident = (e) => {
+        const {title, description} = this.state;
+        this.props.createIncident(title, description)
     }
 
     render(){
@@ -26,20 +30,27 @@ export default class IncidentForm extends Component{
             <div>
                 <Navbar />
                 <div className="container incident-form">
-                    <Form >
-                        <Form.Group>
-                            <Form.Control type="Title" value={this.state.title} onChange={this.handleInputChange("title")} placeholder="Enter a title for incident"/>
-                        </Form.Group>
+                    <Modal.Dialog>
+                        <Modal.Title>Create New Incident</Modal.Title>
+                            <Modal.Body>
+                                <Form>
+                                    <Form.Group>
+                                        <Form.Control type="Title" value={this.state.title} onChange={this.handleInputChange("title")} placeholder="Enter a title for incident"/>
+                                    </Form.Group>
 
-                        <Form.Group>
-                            <Form.Control as="textarea" rows="3" value={this.state.description} onChange={this.handleInputChange('description')} placeholder="Enter a description for incident" />
-                        </Form.Group>
+                                    <Form.Group>
+                                        <Form.Control as="textarea" rows="3" value={this.state.description} onChange={this.handleInputChange('description')} placeholder="Enter a description for incident" />
+                                    </Form.Group>
 
-                        <Button type="submit">Create Incident</Button>
-                    </Form>
+                                    <Button type="submit">Create Incident</Button>
+                                </Form>
+                                </Modal.Body>
+                    </Modal.Dialog>
                 </div>    
             </div>
             
         )
     }
 }
+
+export default connect((state => state), {createIncident})(IncidentForm);
