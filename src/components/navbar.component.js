@@ -3,7 +3,7 @@ import logo from "../incible-logo.png";
 import {Link} from "react-router-dom"
 
 const NavItem = (props) => {
-    return (<li className="nav-item">
+    return (<li className={`nav-item ${props.className}`}>
         <Link to={props.href} className="nav-link">
             {props.children}
         </Link>
@@ -12,8 +12,9 @@ const NavItem = (props) => {
 
 class NavigationBar extends Component {
     render() {
+        const {isLoggedIn} = this.props;
         return (
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-2">
                 <Link className="navbar-brand" to="/">
                     <img src={logo} className="w-logo" alt=""/>
                 </Link>
@@ -38,6 +39,11 @@ class NavigationBar extends Component {
                         </NavItem>
                         <NavItem href={"/about"}>
                             About
+                        </NavItem>
+                    </ul>
+                    <ul className={"navbar-nav float-right"}>
+                        <NavItem className={"float-right"} href={"/logout"}>
+                            <i className="fa fal fa-sign-out-alt"/>Logout
                         </NavItem>
                     </ul>
                 </div>
