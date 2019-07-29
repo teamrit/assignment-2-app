@@ -16,12 +16,10 @@ import IncidentForm from "./components/incidentsForm.component";
 class AppI extends React.Component {
 
     componentDidMount() {
-        if (this.props.loadUser()) {
-            // window.location.pathname = "/incidents";
-        }
-
+        // if (!this.props.user.isLoggedIn && window.location.pathname !== '/login') {
+        //     window.location.pathname = '/login';
+        // }
     }
-
 
     render() {
         return (
