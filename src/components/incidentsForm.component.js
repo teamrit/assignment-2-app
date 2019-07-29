@@ -15,18 +15,18 @@ export default class IncidentForm extends Component{
 
     handleInputChange = key => (e) =>{
         this.setState({[key]: e.target.value})
-    }
+    };
 
     onSubmit = (e) => {
 
-    }
+    };
 
     render(){
         return(
             <div>
                 <Navbar />
                 <div className="container incident-form">
-                    <Form >
+                    <Form>
                         <Form.Group>
                             <Form.Control type="Title" value={this.state.title} onChange={this.handleInputChange("title")} placeholder="Enter a title for incident"/>
                         </Form.Group>
@@ -39,7 +39,6 @@ export default class IncidentForm extends Component{
                     </Form>
                 </div>    
             </div>
-            
         )
     }
 }
