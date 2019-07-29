@@ -12,8 +12,8 @@ import IncidentsList from "./components/incidents.list";
 import connect from "react-redux/es/connect/connect";
 import Logout from "./components/logout.component";
 import {loadUserTokenFromStorage} from "./redux/actions/users.action";
-import IncidentForm from "./components/incidentsForm.component";
 import UserList from "./components/users.list";
+import IncidentItem from "./components/incident.item";
 
 class AppI extends React.Component {
 
@@ -31,6 +31,7 @@ class AppI extends React.Component {
                 <Route path="/logout" component={Logout} />
                 <Route path="/signup/" component={SignUp} />
                 <Route path="/incidents/" exact component={IncidentsList} />
+                <Route path="/incident/:id/:page" component={IncidentItem} />
                 {/*<Route path="/incidents/new" exact component={IncidentForm} />*/}
                 <Route path="/users" exact component={UserList} />
             </div>
