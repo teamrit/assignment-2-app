@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
-import incidents from "./incidents.reducer";
+import incident from "./incidents.reducer";
+import user from "./user.reducer";
 
-const rootReducer = combineReducers({ incidents });
+const rootReducer = combineReducers({ incident , user});
 
 export default rootReducer;
