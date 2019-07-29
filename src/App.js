@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { Provider } from "react-redux";
 import {LandingPage} from "./components/landing.page.component";
