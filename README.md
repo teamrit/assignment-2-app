@@ -9,7 +9,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 | API Calls      | API Calls for getting incidents, logging in                         | `users.action.js`  |
 | SessionStorage | Usage of browser storage for storing token to avoid constant logins | `users.reducer.js` |
 | Redux Thunk    | To perform functions and API requests asynchronously                | `store.js`         |
-|                |                                                                     |                    |
+| Favicon | Add custom favicon icon converted online                                   | `favi.ico`              |
 |                |                                                                     |                    |
 |                |                                                                     |                    |
 |                |                                                                     |                    |
