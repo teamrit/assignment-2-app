@@ -1,7 +1,7 @@
-import {getAuthorized, postAuthorized} from "../request.handler";
+import {deleteAuthorized, getAuthorized, postAuthorized} from "../request.handler";
 import {resolveHost} from "../helper.functions";
 import {INCIDENT} from "../constants";
-import {getToken, loadUserTokenFromStorage} from "./users.action";
+import {getIncidents, getToken, loadUserTokenFromStorage} from "./users.action";
 
 export function createIncident(values) {
     return (dispatch, getState) => {
@@ -14,4 +14,19 @@ export function createIncident(values) {
             });
         }
     };
+}
+
+export function deleteIncident(id) {
+    return(dispatch, getState) => {
+        if(loadUserTokenFromStorage()) {
+            const request = deleteAuthorized(resolveHost(`/incident/${id}`), getToken());
+            request.then(({data}) => {
+                dispatch({ type: INCIDENT.DELETE.SUCCESS, payload: data });
+                // To keep the true state with the database
+                getIncidents()(dispatch,getState);
+            }).catch(error => {
+                dispatch({ type: INCIDENT.DELETE.FAILURE, payload: error });
+            });
+        }
+    }
 }

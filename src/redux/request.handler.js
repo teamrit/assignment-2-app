@@ -1,5 +1,13 @@
 import axios from "axios";
 
+export const deleteAuthorized = (url,token,data) => {
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `${token}`
+    };
+    return axios.delete(url,{headers: headers})
+};
+
 export const postAuthorized = (url,token,data) => {
     const headers = {
         'Content-Type': 'application/json',
