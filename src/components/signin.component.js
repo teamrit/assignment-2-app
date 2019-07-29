@@ -2,14 +2,14 @@ import React, {Component} from 'react';
 import {Link} from "react-router-dom"
 import image from "../incible-logo.png";
 import connect from "react-redux/es/connect/connect";
-import {signIn} from "../redux/actions/users.action";
+import {loadUserTokenFromStorage, signIn} from "../redux/actions/users.action";
 
 export class SignIn extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            username: "",
+            email: "",
             password: ""
         }
     }
@@ -25,9 +25,21 @@ export class SignIn extends Component {
         this.props.signInUser({email,password})
     };
 
+    componentDidMount() {
+        if (this.props.loadUser()) {
+            window.location.pathname = "/incidents";
+        }
+    }
+
+    componentWillReceiveProps() {
+        if (this.props.loadUser()) {
+            window.location.pathname = "/incidents";
+        }
+    }
+
     render() {
 
-        const {username, password} = this.state;
+        const {email, password} = this.state;
 
         return (
             <div className="mh-100 bg-jazz">
@@ -49,16 +61,12 @@ export class SignIn extends Component {
 
                                                 <div className="form-group">
                                                     <label htmlFor="si-username" className="w-100 t-b text-left">Email</label>
-                                                    <input id="si-username" type="text" className="form-control" placeholder="username" value={username} onChange={this.onChange('username')} />
+                                                    <input id="si-username" type="text" className="form-control" placeholder="username" value={email} onChange={this.onChange('email')} />
                                                 </div>
 
                                                 <div className="form-group">
                                                     <label htmlFor="si-password" className="w-100 t-b text-left">Password</label>
                                                     <input id={"si-password"} type="password" className="form-control" placeholder="password" value={password} onChange={this.onChange('password')} />
-                                                </div>
-                                                <div className="form-check">
-                                                    <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                                                    <label className="form-check-label" htmlFor="exampleCheck1">&nbsp;Remember Me</label>
                                                 </div>
                                                 <button className="btn float-right login_btn bg-rumble brr text-white t-b" onClick={this.signIn}>
                                                     Login <i className="fa fa-arrow-right"/>
@@ -85,4 +93,4 @@ export class SignIn extends Component {
     }
 }
 
-export default connect((state => state), {signInUser: signIn})(SignIn);
+export default connect((state => state), {signInUser: signIn, loadUser: loadUserTokenFromStorage})(SignIn);
