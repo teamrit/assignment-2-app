@@ -31,7 +31,7 @@ class AppI extends React.Component {
                 <Route path="/logout" component={Logout} />
                 <Route path="/signup/" component={SignUp} />
                 <Route path="/incidents/" exact component={IncidentsList} />
-                <Route path="/incidents/new" exact component={IncidentForm} />
+                {/*<Route path="/incidents/new" exact component={IncidentForm} />*/}
                 <Route path="/users" exact component={UserList} />
             </div>
         );
