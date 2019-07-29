@@ -17,6 +17,10 @@ export const USER = {
     RETRIEVE : {
         SUCCESS: "RETRIEVE_USER_SUCCESS",
         FAILURE: "RETRIEVE_USER_FAILURE"
+    },
+    GET_LIST: {
+        SUCCESS: "USER_GET_LIST_SUCCESS",
+        FAILURE: "USER_GET_LIST_FAILURE"
     }
 };
 
