@@ -60,11 +60,24 @@ export const getToken = () => {
 export function getIncidents() {
     return (dispatch, getState) => {
         if (loadUserTokenFromStorage()) {
-            const request = getAuthorized(resolveHost("/incident"), getToken())
+            const request = getAuthorized(resolveHost("/incident"), getToken());
             request.then(({ data }) => {
                 dispatch({ type: INCIDENT.GET.SUCCESS, payload: data });
             }).catch(error => {
                 dispatch({ type: INCIDENT.GET.FAILURE, payload: error });
+            });
+        }
+    };
+}
+
+export function getUsers() {
+    return (dispatch, getState) => {
+        if (loadUserTokenFromStorage()) {
+            const request = getAuthorized(resolveHost("/user"), getToken());
+            request.then(({ data }) => {
+                dispatch({ type: USER.GET_LIST.SUCCESS, payload: data });
+            }).catch(error => {
+                dispatch({ type: USER.GET_LIST.FAILURE, payload: error });
             });
         }
     };
