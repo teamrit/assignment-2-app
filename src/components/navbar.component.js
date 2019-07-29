@@ -10,6 +10,14 @@ const NavItem = (props) => {
     </li>)
 };
 
+export const NavItemIcon = ({icon = ''}) => {
+  return (
+      <React.Fragment>
+          <i className={`fas ${icon}`}/>&nbsp;{" "}
+      </React.Fragment>
+  )
+};
+
 class NavigationBar extends Component {
     render() {
         const {isLoggedIn} = this.props;
@@ -26,24 +34,33 @@ class NavigationBar extends Component {
                 <div className="collapse navbar-collapse" id="navbarColor01">
                     <ul className="navbar-nav mr-auto">
                         <NavItem href={"/"}>
+                            <NavItemIcon icon={'fa-home'} />
                             Home <span className="sr-only">(current)</span>
                         </NavItem>
                         <NavItem href={"/incidents"}>
+                            <NavItemIcon icon={'fa-indent'} />
                             Incidents
                         </NavItem>
+                        <NavItem href={"/users"}>
+                            <NavItemIcon icon={'fa-user-friends'} />
+                            Users
+                        </NavItem>
                         <NavItem href={"/features"}>
+                            <NavItemIcon icon={'fa-star'} />
                             Features
                         </NavItem>
                         <NavItem href={"/pricing"}>
+                            <NavItemIcon icon={'fa-dollar-sign'} />
                             Pricing
                         </NavItem>
                         <NavItem href={"/about"}>
+                            <NavItemIcon icon={'fa-info-circle'} />
                             About
                         </NavItem>
                     </ul>
                     <ul className={"navbar-nav float-right"}>
                         <NavItem className={"float-right"} href={"/logout"}>
-                            <i className="fa fal fa-sign-out-alt"/>Logout
+                            <NavItemIcon icon={'fa-sign-out-alt'} />Logout
                         </NavItem>
                     </ul>
                 </div>
