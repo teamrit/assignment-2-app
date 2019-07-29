@@ -9,7 +9,7 @@
   font-weight: 300;
   font-style: normal;
 }
-* {
+*,:not(i) {
   font-family: Circular, Helvetica, Arial, sans-serif;
 }
 /*Text*/
@@ -19,10 +19,10 @@
 .t-sb {
   font-weight: 700;
 }
-.ta-l {
-
-}
 /*Backgrounds*/
+.bg-eggshell {
+    background-color: #EDEBED;
+}
 .bg-jazz {
   background-color: #272527;
 }
