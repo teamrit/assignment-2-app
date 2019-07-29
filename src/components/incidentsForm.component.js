@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import Navbar from "./navbar.component";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button"
+import {connect} from "react-redux"
+import {createIncident} from "../redux/actions/incidents.action";
 
-export default class IncidentForm extends Component{
+class IncidentForm extends Component{
 
     constructor(props) {
         super(props);
@@ -18,13 +19,14 @@ export default class IncidentForm extends Component{
     };
 
     onSubmit = (e) => {
-
+        e.preventDefault();
+        const {title, description} = this.state
+        this.props.createIncident({title, description})
     };
 
     render(){
         return(
             <div>
-                <Navbar />
                 <div className="container incident-form">
                     <Form>
                         <Form.Group>
@@ -35,10 +37,11 @@ export default class IncidentForm extends Component{
                             <Form.Control as="textarea" rows="3" value={this.state.description} onChange={this.handleInputChange('description')} placeholder="Enter a description for incident" />
                         </Form.Group>
 
-                        <Button type="submit">Create Incident</Button>
+                        <Button type="submit" onClick={this.onSubmit}>Create Incident</Button>
                     </Form>
-                </div>    
+   c             </div>
             </div>
         )
     }
 }
+export default connect((state => state.incidents), {createIncident}) (IncidentForm)

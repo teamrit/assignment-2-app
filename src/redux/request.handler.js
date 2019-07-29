@@ -3,7 +3,7 @@ import axios from "axios";
 export const postAuthorized = (url,token,data) => {
     const headers = {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        'Authorization': `${token}`
     };
     return axios.post(url,data,{headers: headers})
 };

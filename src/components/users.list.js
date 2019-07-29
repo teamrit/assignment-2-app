@@ -7,7 +7,6 @@ import {Container, Dropdown, Tab, Tabs} from 'react-bootstrap';
 class UsersList extends Component {
 
     static renderUser(user) {
-        console.log(user)
         return <div key={user._id} className={"border p-4 rounded mt-3 text-align-left container text-left bg-eggshell"}>
             <h5 className="t-b">
                 {user.lastName}, {user.firstName}

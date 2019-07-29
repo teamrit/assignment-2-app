@@ -5,6 +5,7 @@ import {getIncidents, signIn} from "../redux/actions/users.action";
 import {IncidentStatus} from "./incident.status";
 import {beautifyDate} from "../redux/helper.functions";
 import {Container,Tabs,Tab,Dropdown} from 'react-bootstrap';
+import IncidentForm from "../components/incidentsForm.component";
 
 class IncidentsList extends Component {
 
@@ -36,6 +37,7 @@ class IncidentsList extends Component {
                             {incidents.map(r => IncidentsList.renderIncident(r))}
                         </Tab>
                         <Tab eventKey="profile" title={<div className="t-b"><NavItemIcon icon={"fa-plus"}/>Create new</div>}>
+                            <IncidentForm />
                         </Tab>
                         <Tab eventKey="contact" title="Contact">
                         </Tab>
