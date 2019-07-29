@@ -26,8 +26,16 @@
 .bg-jazz {
   background-color: #272527;
 }
-.bg-hiphop {
+.b-none {
+  border: none;
+}
+.bg-hiphop  {
   background-color: #ee6352;
+  border: none;
+}
+.bg-hiphop:hover , .bg-hiphop:active , .bg-hiphop:focus  {
+  background-color: #8f3a31 !important;
+  border: none;
 }
 .bg-hiphop-faded {
   background-color: rgba(238,99,82,0.5);
