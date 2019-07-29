@@ -3,7 +3,7 @@ import logo from "../incible-logo.png";
 import {Link} from "react-router-dom"
 
 const NavItem = (props) => {
-    return (<li className={`nav-item navi ${props.className}`}>
+    return (<li className={`nav-item navi ${props.className} ${props.href == window.location.pathname && 'nav-a'}`}>
         <Link to={props.href} className="nav-link">
             {props.children}
         </Link>
