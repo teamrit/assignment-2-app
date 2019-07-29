@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import NavigationBar from "./navbar.component";
+import NavigationBar, {NavItemIcon} from "./navbar.component";
 import connect from "react-redux/es/connect/connect";
 import {getIncidents, signIn} from "../redux/actions/users.action";
 import {IncidentStatus} from "./incident.status";
 import {beautifyDate} from "../redux/helper.functions";
-import {Container,Tabs,Tab} from 'react-bootstrap';
+import {Container,Tabs,Tab,Dropdown} from 'react-bootstrap';
 
 class IncidentsList extends Component {
 
-    renderIncident(incident) {
+    static renderIncident(incident) {
         return <div key={incident._id} className={"border p-4 rounded mt-3 text-align-left container text-left bg-eggshell"}>
             <h5 className="t-b">
                 {incident.title}
@@ -16,6 +16,7 @@ class IncidentsList extends Component {
             </h5>
             <p>{incident.description}</p>
             <IncidentStatus status={incident.status} />
+            <Dropdown.Divider />
         </div>
     }
 
@@ -31,14 +32,14 @@ class IncidentsList extends Component {
                 <Container>
                     <h1 className="t-b pt-3 pb-3">Incident List </h1>
                     <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
-                        <Tab eventKey="home" title="Home">
+                        <Tab eventKey="home" title="List">
+                            {incidents.map(r => IncidentsList.renderIncident(r))}
                         </Tab>
-                        <Tab eventKey="profile" title="Profile">
+                        <Tab eventKey="profile" title={<div className="t-b"><NavItemIcon icon={"fa-plus"}/>Create new</div>}>
                         </Tab>
                         <Tab eventKey="contact" title="Contact">
                         </Tab>
                     </Tabs>
-                    {incidents.map(r => this.renderIncident(r))}
                 </Container>
             </React.Fragment>
         );
