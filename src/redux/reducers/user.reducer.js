@@ -4,11 +4,13 @@ import {setUserToken} from "../actions/users.action";
 const initialState = {
     userProfile: {},
     authToken: "",
-    isLoggedIn: false
+    isLoggedIn: false,
+    users: []
 };
 
 function userReducer(state = initialState, action) {
     switch (action.type) {
+        // Authorization Cases
         case USER.SIGN_IN.SUCCESS:
             const response = action.payload;
             setUserToken(response.token);
@@ -29,6 +31,13 @@ function userReducer(state = initialState, action) {
                 isLoggedIn: true
             });
         }
+
+        // User as a data
+        case USER.GET_LIST.SUCCESS:
+            return Object.assign({}, state, {
+                users: action.payload
+            });
+
         default:
             return state
     }
