@@ -6,7 +6,7 @@ import {Switch,Route} from "react-router-dom";
 const IncidentItem = (props) => {
     let print = (props) => {
         console.log(props)
-    }
+    };
 
     return (
         <React.Fragment>

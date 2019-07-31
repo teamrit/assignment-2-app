@@ -32,7 +32,7 @@ class IncidentsList extends Component {
                     <Tabs defaultActiveKey="profile"
                           // activeKey={}
                         >
-                        <Tab eventKey="profile"
+                    <Tab eventKey="profile"
                                   title={<div className="t-b"><NavItemIcon icon={"fa-list"}/>All incidents</div>}
                         >
                             {incidents.map(r =>
