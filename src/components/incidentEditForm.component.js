@@ -14,17 +14,26 @@ class IncidentEditForm extends Component{
     }
 
     componentDidMount(){
-        this.getData()
+        this.getData();
     }
 
     //to get previous data//
     getData = () => {
         const{id} = this.props.match.params;
-        this.props.getIncidentDetails(id)
+        this.props.getIncidentDetails(id);
+        const {foundIncident} = this.props;
+        if(foundIncident){
+            console.log(foundIncident);
+            console.log("this is from getdata");
+            this.setState({title: foundIncident.title});
+            this.setState({description: foundIncident.description});
+        }
+        //need to put data from foundIncident to state//
+        //this.setState({title: foundIncident.title});
     };
 
     handleInputChange = key => (e) =>{
-        this.setState({[key]: e.target.value})
+        this.setState({[key]: e.target.value});
         console.log(this.state)
     };
     
@@ -56,7 +65,7 @@ class IncidentEditForm extends Component{
 
                         <Form.Group>
                             <Form.Label className="t-b">Description</Form.Label>
-                            <Form.Control as="textarea" rows="3" onChange={this.handleInputChange("description")} placeholder="Enter a description for incident" />
+                            <Form.Control as="textarea" rows="3" value={this.state.description} onChange={this.handleInputChange("description")} placeholder="Enter a description for incident" />
                         </Form.Group>
 
                         <Button
