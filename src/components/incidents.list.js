@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from "react-router-dom";
 import NavigationBar, {NavItemIcon} from "./navbar.component";
 import connect from "react-redux/es/connect/connect";
 import {getIncidents, getUserProfile, signIn} from "../redux/actions/users.action";
@@ -6,6 +7,7 @@ import {Container,Tabs,Tab,Dropdown} from 'react-bootstrap';
 import IncidentForm from "../components/incidentsForm.component";
 import {deleteIncident} from "../redux/actions/incidents.action";
 import {IncidentListItem} from "./incident.list.item";
+import IncidentEditForm from "./incidentEditForm.component"
 
 class IncidentsList extends Component {
 
