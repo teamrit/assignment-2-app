@@ -28,7 +28,7 @@ class AppI extends React.Component {
 
                 <Route path="/incidents/" exact component={IncidentsList} />
                 <Route path="/incident/:id/:page" component={IncidentItem} />
-                <Route path="/incident/edit/" exact component={IncidentEditForm} />
+                <Route path="/incident/:id/edit" exact component={IncidentEditForm} />
 
                 <Route path="/users/" exact component={UserList} />
                 <Route path="/user/:page" exact component={UserList} />

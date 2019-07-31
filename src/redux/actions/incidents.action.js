@@ -30,3 +30,15 @@ export function deleteIncident(id) {
         }
     }
 }
+
+export function getIncidentDetails(id) {
+    return(dispatch, getState) => {
+        const request = getAuthorized(resolveHost(`/incident/${id}`), getToken());
+        request.then(({data}) => {
+            dispatch({type: INCIDENT.DETAILS.SUCCESS, payload: data})
+            getIncidents()(dispatch,getState);
+        }).catch(error => {
+            dispatch({ type: INCIDENT.DETAILS.FAILURE, payload: error });
+        });
+    }
+}

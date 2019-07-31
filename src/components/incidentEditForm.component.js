@@ -1,7 +1,33 @@
 import React, {Component} from "react";
 import {Form, Button, Dropdown} from "react-bootstrap";
+import { connect } from "react-redux";
+import {getIncidentDetails} from "../redux/actions/incidents.action"
 
 class IncidentEditForm extends Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            title: "",
+            description: "",
+            status: ""
+        }
+    }
+
+    componentDidMount(){
+        this.getData()
+    }
+
+    //to get previous data//
+    getData = () => {
+        const{id} = this.props.match.params;
+        this.props.getIncidentDetails(id)
+    };
+
+    handleInputChange = key => (e) =>{
+        this.setState({[key]: e.target.value})
+        console.log(this.state)
+    };
+    
     render(){
         return(
             <div>
@@ -9,7 +35,7 @@ class IncidentEditForm extends Component{
                     <Form>
                         <Form.Group>
                             <Form.Label className="t-b">Title</Form.Label>
-                            <Form.Control type="Title" placeholder="Enter a title for incident"/>
+                            <Form.Control type="Title" value={this.state.title} onChange={this.handleInputChange("title")} placeholder="Enter a title for incident"/>
                         </Form.Group>
 
                         <Form.Group>
@@ -30,7 +56,7 @@ class IncidentEditForm extends Component{
 
                         <Form.Group>
                             <Form.Label className="t-b">Description</Form.Label>
-                            <Form.Control as="textarea" rows="3" placeholder="Enter a description for incident" />
+                            <Form.Control as="textarea" rows="3" onChange={this.handleInputChange("description")} placeholder="Enter a description for incident" />
                         </Form.Group>
 
                         <Button
@@ -45,4 +71,4 @@ class IncidentEditForm extends Component{
     };
 };
 
-export default IncidentEditForm;
+export default connect((state => state.incident), {getIncidentDetails}) (IncidentEditForm);
