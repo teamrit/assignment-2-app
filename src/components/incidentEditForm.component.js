@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import {Form, Button, Dropdown} from "react-bootstrap";
 import { connect } from "react-redux";
 import {getIncidentDetails} from "../redux/actions/incidents.action"
+import DropdownButton from "react-bootstrap/DropdownButton";
+import DropdownItem from "react-bootstrap/es/DropdownItem";
 
 class IncidentEditForm extends Component{
     constructor(props){
@@ -27,6 +29,7 @@ class IncidentEditForm extends Component{
             console.log("this is from getdata");
             this.setState({title: foundIncident.title});
             this.setState({description: foundIncident.description});
+            this.setState({status: foundIncident.status});
         }
         //need to put data from foundIncident to state//
         //this.setState({title: foundIncident.title});
@@ -49,17 +52,11 @@ class IncidentEditForm extends Component{
 
                         <Form.Group>
                         <Form.Label className="t-b">Status</Form.Label>
-                            <Dropdown>
-                                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                    Incident Status
-                                </Dropdown.Toggle>
-
-                                <Dropdown.Menu>
-                                    <Dropdown.Item >Active</Dropdown.Item>
-                                    <Dropdown.Item >Resolved</Dropdown.Item>
-                                    <Dropdown.Item >Cancelled</Dropdown.Item>
-                                    </Dropdown.Menu>
-                                </Dropdown>
+                            <DropdownButton title={this.state.status}>
+                                <DropdownItem>Active</DropdownItem>
+                                <DropdownItem>Resolved</DropdownItem>
+                                <DropdownItem>Cancelled</DropdownItem>
+                            </DropdownButton>
                         </Form.Group>
                         
 
