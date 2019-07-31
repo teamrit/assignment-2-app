@@ -20,11 +20,16 @@ class IncidentEditForm extends Component{
     //to get previous data//
     getData = () => {
         const{id} = this.props.match.params;
-        this.props.getIncidentDetails(id)
+        this.props.getIncidentDetails(id);
+        const foundIncident = this.props.foundIncident;
+        console.log(foundIncident);
+        console.log("this is from getdata");
+        //need to put data from foundIncident to state//
+        //this.setState({title: foundIncident.title});
     };
 
     handleInputChange = key => (e) =>{
-        this.setState({[key]: e.target.value})
+        this.setState({[key]: e.target.value});
         console.log(this.state)
     };
     
