@@ -13,7 +13,7 @@ export const IncidentListItem = ({incident= {} , deleteHandler}) => {
                 <Link to={`/incident/${incident._id}/details`}>
                     {incident.title}
                 </Link>
-            <div className="float-right">{beautifyDate(incident.created)}</div>
+            <div className="float-right">{beautifyDate(incident.createdOn)}</div>
             </h5>
             <p>{incident.description}</p>
             <IncidentStatus status={incident.status} />
@@ -22,11 +22,11 @@ export const IncidentListItem = ({incident= {} , deleteHandler}) => {
                 <Dropdown.Divider />
             </div>
             <div className="p-2">
-                <Button type="submit" className="btn-sm bg-hiphop mr-2" onClick={deleteHandler}>
+                <Button type="submit" className="btn-sm bg-hiphop mr-2 brr t-b" onClick={deleteHandler}>
                     <NavItemIcon icon="fa-trash"/>
                     Delete
                 </Button>
-                <Link to={`/incident/${incident._id}/edit`} className="btn btn-sm btn-info btn-sm">
+                <Link to={`/incident/${incident._id}/edit`} className="btn btn-sm btn-info btn-sm brr t-b">
                     <NavItemIcon icon="fa-edit"/>
                     Edit
                 </Link>

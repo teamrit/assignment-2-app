@@ -1,15 +1,13 @@
 import React, {Component} from 'react';
-import image from "../incible-logo.png";
 import {Link} from "react-router-dom";
 import { connect } from 'react-redux';
 import {signUpUser} from "../redux/actions/users.action";
-
-const SignUpInput = ({id,label="",keyForInput = "",...inputProps}) => (
-    <div className="form-group">
-        <label htmlFor={id} className="w-100 t-b text-left">{label}</label>
-        <input id={id} className="form-control" {...inputProps} />
-    </div>
-);
+import {Toast,Form} from "react-bootstrap";
+import {CenteredLogo} from "./centered.logo";
+import ReactDOM from "react-dom";
+import {SignUpInput} from "./signup.input";
+import {Modal} from "./portal";
+import {Toaster} from "./toast.component";
 
 export class SignUp extends Component {
 
@@ -20,8 +18,10 @@ export class SignUp extends Component {
             password: "",
             firstName: "",
             lastName: "",
-            confirmPassword: ""
+            confirmPassword: "",
+            showResponse: true
         }
+        this.el = document.createElement('div');
     }
 
     onChange = key => (e) => {
@@ -32,12 +32,13 @@ export class SignUp extends Component {
     signUp = (e) => {
         e.preventDefault();
         const {email,password,firstName,lastName} = this.state;
-        console.warn(email,password,firstName,lastName)
-        console.log(this.props.signUpUser())
+        this.props.signUpUser({email,password,firstName,lastName});
     };
 
+
     render() {
-        const {email,password,firstName,lastName,confirmPassword} = this.state;
+        const {email,password,firstName,lastName,confirmPassword,showResponse} = this.state;
+        console.log(this.state.user);
         return (
             <div className="mh-100 bg-jazz">
                 <div className="mh-100 bg-ripple aligner">
@@ -47,14 +48,20 @@ export class SignUp extends Component {
                                 <div className="d-flex justify-content-center h-100">
                                     <div className="card br-major h-70">
                                         <div className="card-header br-major-t bg-pop text-white">
-                                            <h3 className="t-b">Sign Up</h3>
+                                            <h3 className="t-b text-center">Sign Up</h3>
                                         </div>
+                                        <Modal>
+                                            <Toaster
+                                                show={showResponse}
+                                                onClose={() => {this.setState({showResponse: false})}}
+                                                title={"Sign up successfully"}
+                                                description={"Hey buddy"}
+                                            />
+                                        </Modal>
+
                                         <div className="card-body">
                                             <form>
-                                                <img src={image}
-                                                     title="Incible: Invincible Incident Management"
-                                                     alt="Incible: Invincible Incident Management"
-                                                     className="logo mb-3 border rounded" />
+                                                <CenteredLogo />
                                                 <SignUpInput
                                                     label={"First Name"}
                                                     id={"su-firstName"}
@@ -95,6 +102,13 @@ export class SignUp extends Component {
                                                     onChange={this.onChange("confirmPassword")}
                                                     value={confirmPassword}
                                                 />
+                                                <Form.Group controlId="exampleForm.ControlSelect1">
+                                                    <Form.Label className={"t-b"}>Account type</Form.Label>
+                                                    <Form.Control as="select">
+                                                        <option>Admin</option>
+                                                        <option>Standard User</option>
+                                                    </Form.Control>
+                                                </Form.Group>
                                                 <div className="form-check">
                                                     <input type="checkbox" className="form-check-input" id="exampleCheck1" />
                                                     <label className="form-check-label" htmlFor="exampleCheck1">&nbsp;Remember Me</label>

@@ -3,16 +3,26 @@ import NavigationBar, {NavItemIcon} from "./navbar.component";
 import connect from "react-redux/es/connect/connect";
 import {getUsers} from "../redux/actions/users.action";
 import {Container, Dropdown, Tab, Tabs} from 'react-bootstrap';
+import {Redirect} from "react-router-dom";
 
 class UsersList extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            page: "all"
+        };
+    }
 
     static renderUser(user) {
         return <div key={user._id} className={"border p-4 rounded mt-3 text-align-left container text-left bg-eggshell"}>
             <h5 className="t-b">
                 {user.lastName}, {user.firstName}
-                {/*<div className="float-right">{beautifyDate(user.created)}</div>*/}
             </h5>
-            <p>{user.email}</p>
+            <p>
+                <NavItemIcon icon="fa-envelope" />
+                {user.email}
+            </p>
             <div className="row">
                 <div className="col-md-2 p-2">
                     <a href={`mailto:${user.email}`} className="btn btn-sm bg-rumble text-white brr">
@@ -22,7 +32,6 @@ class UsersList extends Component {
             </div>
 
             <p>{user.description}</p>
-            {/*<IncidentStatus status={user.status} />*/}
             <Dropdown.Divider />
         </div>
     }
@@ -31,21 +40,38 @@ class UsersList extends Component {
         this.props.getUsers();
     }
 
+    static getDerivedStateFromProps(nextProps, prevState) {
+        return {
+            ...prevState,
+            page: nextProps.match.params.page
+        }
+    }
+
     render() {
         const {users = []} = this.props;
-        console.log(this.props)
+        const {page} = this.state;
         return (
             <React.Fragment>
                 <NavigationBar />
                 <Container>
                     <h1 className="t-b pt-3 pb-3">Users</h1>
-                    <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
-                        <Tab eventKey="home" title="List">
+                    <Redirect from={"/users"} to={"/user/all"} />
+                    <Tabs
+                        onSelect={(option) => {
+                            // this.changePageName(option)}
+                            this.props.history.push(`/user/${option}`)
+                        }}
+                        defaultActiveKey="home" activeKey={page}>
+                        <Tab
+                            eventKey="all" title={<div className="t-b"><NavItemIcon icon={"fa-users"}/>All users</div>}>
                             {users.map(r => UsersList.renderUser(r))}
                         </Tab>
-                        <Tab eventKey="profile" title="Profile">
+
+                        <Tab eventKey="new" title={<div className="t-b"><NavItemIcon icon={"fa-plus"}/>Create new</div>} >
+
                         </Tab>
-                        <Tab eventKey="contact" title="Contact">
+                        <Tab eventKey="profile" title={<div className="t-b"><NavItemIcon icon={"fa-user"}/>Profile</div>} >
+
                         </Tab>
                     </Tabs>
                 </Container>

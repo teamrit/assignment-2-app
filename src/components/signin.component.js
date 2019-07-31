@@ -3,6 +3,7 @@ import {Link} from "react-router-dom"
 import image from "../incible-logo.png";
 import connect from "react-redux/es/connect/connect";
 import {loadUserTokenFromStorage, signIn} from "../redux/actions/users.action";
+import {CenteredLogo} from "./centered.logo";
 
 export class SignIn extends Component {
 
@@ -50,15 +51,11 @@ export class SignIn extends Component {
                                 <div className="d-flex justify-content-center h-100">
                                     <div className="card br-major h-70">
                                         <div className="card-header br-major-t text-white bg-rumblev">
-                                            <h3 className="t-b">Sign In</h3>
+                                            <h3 className="t-b text-center">Sign In</h3>
                                         </div>
                                         <div className="card-body">
                                             <form>
-                                                <img src={image}
-                                                     title="Incible: Invincible Incident Management"
-                                                     alt="Incible: Invincible Incident Management"
-                                                     className="logo mb-3 border rounded" />
-
+                                                <CenteredLogo />
                                                 <div className="form-group">
                                                     <label htmlFor="si-username" className="w-100 t-b text-left">Email</label>
                                                     <input id="si-username" type="text" className="form-control" placeholder="username" value={email} onChange={this.onChange('email')} />

@@ -2,11 +2,11 @@ import React from 'react';
 import NavigationBar from "./navbar.component";
 import {Jumbotron, Button} from "react-bootstrap";
 
-export const Feature = () => {
+export const Feature = ({imgSource='',title}) => {
   return (
       <div className="border rounded p-3">
-          <img src="https://cdn4.iconfinder.com/data/icons/project-management-5-3/65/247-512.png" alt="" className="img-thumbnail"/>
-          Hello
+          <img src={imgSource} alt="" className="img-thumbnail"/>
+          <h3 className="t-b">{title}</h3>
       </div>
   )
 };
@@ -15,7 +15,7 @@ export const LandingPage = () => {
     return (
         <div>
             <NavigationBar />
-            <Jumbotron>
+            <Jumbotron className="mb-0">
                 <h1 className="t-b mb-1">Welcome to Incible!</h1>
                 <p>
                     Incident management made easy. <br/>
@@ -29,16 +29,21 @@ export const LandingPage = () => {
             </Jumbotron>
             <div className="container">
                 <div className="row">
-                    <div className="col-3 p-2">
+                    <div className="col-md-3 p-2">
+                        <Feature
+                            title="Trusted"
+                            imgSource={"https://www.svgrepo.com/show/10927/office-buildings.svg"}
+                        />
+                    </div>
+                    <div className="col-md-3 p-2">
+                        <Feature
+                            title="Bug free"
+                        />
+                    </div>
+                    <div className="col-md-3 p-2">
                         <Feature />
                     </div>
-                    <div className="col-3 p-2">
-                        <Feature />
-                    </div>
-                    <div className="col-3 p-2">
-                        <Feature />
-                    </div>
-                    <div className="col-3 p-2">
+                    <div className="col-md-3 p-2">
                         <Feature />
                     </div>
                 </div>

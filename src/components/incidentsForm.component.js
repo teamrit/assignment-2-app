@@ -20,28 +20,34 @@ class IncidentForm extends Component{
 
     onSubmit = (e) => {
         e.preventDefault();
-        const {title, description} = this.state
+        const {title, description} = this.state;
         this.props.createIncident({title, description})
     };
 
     render(){
         return(
             <div>
-                <div className="container incident-form">
+                <div className="container incident-form align-self-left">
                     <Form>
                         <Form.Group>
+                            <Form.Label className="t-b">Title</Form.Label>
                             <Form.Control type="Title" value={this.state.title} onChange={this.handleInputChange("title")} placeholder="Enter a title for incident"/>
                         </Form.Group>
 
                         <Form.Group>
+                            <Form.Label className="t-b">Description</Form.Label>
                             <Form.Control as="textarea" rows="3" value={this.state.description} onChange={this.handleInputChange('description')} placeholder="Enter a description for incident" />
                         </Form.Group>
 
-                        <Button type="submit" onClick={this.onSubmit}>Create Incident</Button>
+                        <Button
+                            className="brr"
+                            type="submit" onClick={this.onSubmit}>
+                            Create Incident
+                        </Button>
                     </Form>
-   c             </div>
+                </div>
             </div>
         )
     }
 }
-export default connect((state => state.incidents), {createIncident}) (IncidentForm)
+export default connect((state => state.incident), {createIncident}) (IncidentForm)

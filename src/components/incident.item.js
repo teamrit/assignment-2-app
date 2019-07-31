@@ -4,7 +4,6 @@ import {Container, Tab, Tabs} from "react-bootstrap";
 import {Switch,Route} from "react-router-dom";
 
 const IncidentItem = (props) => {
-    console.log(props)
     return (
         <React.Fragment>
             <NavigationBar />
@@ -17,6 +16,6 @@ const IncidentItem = (props) => {
             </Container>
         </React.Fragment>
     );
-}
+};
 
 export default IncidentItem;
