@@ -5,7 +5,8 @@ const initialState = {
     userProfile: {},
     authToken: "",
     isLoggedIn: false,
-    users: []
+    users: [],
+    errors: []
 };
 
 function userReducer(state = initialState, action) {
@@ -18,9 +19,22 @@ function userReducer(state = initialState, action) {
                 authToken: response.token,
                 isLoggedIn: true
             });
+        case USER.SIGN_UP.SUCCESS:
+            return Object.assign({}, state, {
+                authToken: response.token,
+                isLoggedIn: true
+            });
+        case USER.GET_MY_PROFILE.SUCCESS:
+            return Object.assign({}, state, {
+                userProfile: action.payload
+            });
+        case USER.GET_MY_PROFILE.FAILURE:
+            return Object.assign({}, state, {
+                errors: [state.error, action.payload]
+            });
         case USER.SIGN_IN.FAILURE:
             return Object.assign({}, state, {
-                error: {error: action.payload, occurredOn: new Date()}
+                errors: [state.error, action.payload]
             });
         case USER.SIGN_OUT.SUCCESS:
             return Object.assign({}, initialState, {});

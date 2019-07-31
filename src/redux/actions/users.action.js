@@ -1,15 +1,85 @@
 import axios from "axios";
-import {USER,INCIDENT} from "../constants";
+import {USER, INCIDENT, HTTP_METHOD} from "../constants";
 import {resolveHost} from "../helper.functions";
-import {getAuthorized} from "../request.handler";
+import {deleteAuthorized, getAuthorized, postAuthorized, putAuthorized} from "../request.handler";
+
+/**
+ *
+ * @param dispatch
+ * @param getState: f()
+ * @param requestData: f()
+ * @param method: String - One of GET, POST, PUT, DELETE
+ * @param url: String  - Unresolved pathname
+ * @param authorised: Boolean - Whether to use token or not
+ * @param successAction: String - Function to dispatch if and when the request is successful
+ * @param failureAction: String - Function to dispatch if and when the request is unsuccessful
+ * @returns {Function}
+ */
+export function useBoilerplateRequestAuthorised(dispatch,getState,requestData,method,url,successAction,failureAction,token) {
+    let request;
+    request = method === HTTP_METHOD.GET ? getAuthorized(resolveHost(url), token)
+        :     method === HTTP_METHOD.POST ? postAuthorized(resolveHost(url), token, requestData)
+            :     method === HTTP_METHOD.PUT ? putAuthorized(resolveHost(url), token, requestData)
+                :     method === HTTP_METHOD.DELETE ? deleteAuthorized(resolveHost(url), token, requestData)
+                    :     null;
+    request && request.then(({ data }) => {
+        dispatch({ type: successAction, payload: data });
+    }).catch(e => {
+        dispatch({ type: failureAction, payload: e });
+    });
+}
+
+/**
+ *
+ * @param dispatch
+ * @param getState
+ * @param requestData
+ * @param method - One of GET, POST, PUT, DELETE
+ * @param url - Unresolved pathname
+ * @param successAction
+ * @param failureAction
+ * @returns {Function}
+ */
+export function useBoilerplateRequest(dispatch,getState,requestData,method,url,successAction,failureAction) {
+    let request;
+    request = method === HTTP_METHOD.GET ? axios.get(resolveHost(url))
+        :     method === HTTP_METHOD.POST ? axios.post(resolveHost(url), requestData)
+        :     method === HTTP_METHOD.PUT ? axios.put(resolveHost(url), requestData)
+        :     method === HTTP_METHOD.DELETE ? axios.delete(resolveHost(url), requestData)
+        :     null;
+    request && request.then(({ data }) => {
+        dispatch({ type: successAction, payload: data });
+    }).catch(e => {
+        dispatch({ type: failureAction, payload: e });
+    });
+}
+
+export function getUserProfile() {
+    return (dispatch, getState) => {
+        if (loadUserTokenFromStorage()) {
+            const token = getToken();
+            useBoilerplateRequestAuthorised(
+                dispatch,
+                getState,
+                {},
+                HTTP_METHOD.GET,
+                '/user/me',
+                USER.GET_MY_PROFILE.SUCCESS,
+                USER.GET_MY_PROFILE.FAILURE,
+                token
+            )
+        }
+    }
+}
 
 export function signUpUser(user) {
     return (dispatch, getState) => {
-        // console.log(getState());
-        console.log(dispatch,getState);
-        const request = axios.get(resolveHost("/status"));
+        const request = axios.post(resolveHost("/user/register"), user);
+        console.log(user)
         request.then(({ data }) => {
             dispatch({ type: USER.SIGN_UP.SUCCESS, payload: data });
+        }).catch(e => {
+            dispatch({ type: USER.SIGN_UP.FAILURE, payload: e });
         });
     };
 }
@@ -24,6 +94,7 @@ export function logout() {
 export function signIn(credentials) {
     return (dispatch, getState) => {
         resetUserToken();
+        getUserProfile();
         const request = axios.post(resolveHost("/user/login"), credentials);
         request.then(r => {
             dispatch({type: USER.SIGN_IN.SUCCESS, payload: r.data});

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import NavigationBar, {NavItemIcon} from "./navbar.component";
 import connect from "react-redux/es/connect/connect";
-import {getIncidents, signIn} from "../redux/actions/users.action";
+import {getIncidents, getUserProfile, signIn} from "../redux/actions/users.action";
 import {Container,Tabs,Tab,Dropdown} from 'react-bootstrap';
 import IncidentForm from "../components/incidentsForm.component";
 import {deleteIncident} from "../redux/actions/incidents.action";
@@ -12,21 +12,27 @@ class IncidentsList extends Component {
 
     componentDidMount() {
         this.props.getIncidents();
+        this.props.getUserProfile();
     }
 
     onDeletePressed = (id) => (e) => {
         this.props.deleteIncident(id)
-    }
+    };
 
     render() {
         const {incidents = [], incident} = this.props;
+        console.log(this.props);
         return (
             <React.Fragment>
                 <NavigationBar />
                 <Container>
-                    <h1 className="t-b pt-3 pb-3">Incident List </h1>
-                    <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
-                        <Tab eventKey="profile" title="List">
+                    <h1 className="t-b pt-3 pb-3">Incidents</h1>
+                    <Tabs defaultActiveKey="profile"
+                          // activeKey={}
+                        >
+                        <Tab eventKey="profile"
+                                  title={<div className="t-b"><NavItemIcon icon={"fa-list"}/>All incidents</div>}
+                        >
                             {incidents.map(r =>
                                 <IncidentListItem
                                     incident={r}
@@ -35,7 +41,9 @@ class IncidentsList extends Component {
                                 />)
                             }
                         </Tab>
-                        <Tab eventKey="home" title={<div className="t-b"><NavItemIcon icon={"fa-plus"}/>Create new</div>}>
+                        <Tab eventKey="home"
+                             title={<div className="t-b"><NavItemIcon icon={"fa-plus"}/>Create new</div>}
+                        >
                             <IncidentForm />
                         </Tab>
                         <Tab eventKey="contact" title="Contact">
@@ -47,4 +55,4 @@ class IncidentsList extends Component {
     }
 }
 
-export default connect((state => state.incident), {getIncidents: getIncidents, deleteIncident})(IncidentsList);
+export default connect((state => state.incident), {getIncidents: getIncidents, deleteIncident, getUserProfile})(IncidentsList);

@@ -21,6 +21,10 @@ export const USER = {
     GET_LIST: {
         SUCCESS: "USER_GET_LIST_SUCCESS",
         FAILURE: "USER_GET_LIST_FAILURE"
+    },
+    GET_MY_PROFILE: {
+        SUCCESS: "GET_MY_PROFILE_SUCCESS",
+        FAILURE: "GET_MY_PROFILE_FAILURE"
     }
 };
 
@@ -41,6 +45,13 @@ export const INCIDENT = {
 
 export const STATUS = {
     ACTIVE: "ACTIVE",
-    DELETE: "DELETE",
+    DELETED: "DELETED",
     PAUSE: "PAUSE"
+};
+
+export const HTTP_METHOD = {
+  GET: "GET",
+  POST: "POST",
+  PUT: "PUT",
+  DELETE: "DELETE"
 };
