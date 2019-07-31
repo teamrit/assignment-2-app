@@ -16,24 +16,21 @@ import UserList from "./components/users.list";
 import IncidentItem from "./components/incident.item";
 
 class AppI extends React.Component {
-
-    componentDidMount() {
-        // if (!this.props.user.isLoggedIn && window.location.pathname !== '/login') {
-        //     window.location.pathname = '/login';
-        // }
-    }
-
     render() {
         return (
             <div className="App">
                 <Route path="/" exact component={LandingPage} />
+
                 <Route path="/login/" component={SignIn} />
                 <Route path="/logout" component={Logout} />
                 <Route path="/signup/" component={SignUp} />
+
                 <Route path="/incidents/" exact component={IncidentsList} />
                 <Route path="/incident/:id/:page" component={IncidentItem} />
-                {/*<Route path="/incidents/new" exact component={IncidentForm} />*/}
-                <Route path="/users" exact component={UserList} />
+
+                <Route path="/users/" exact component={UserList} />
+                <Route path="/user/:page" exact component={UserList} />
+                <Route path="/users/:page" exact component={UserList} />
             </div>
         );
     }
