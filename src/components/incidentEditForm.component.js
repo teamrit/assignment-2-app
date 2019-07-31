@@ -34,12 +34,16 @@ class IncidentEditForm extends Component{
         //need to put data from foundIncident to state//
         //this.setState({title: foundIncident.title});
     };
-
+    //for handle change on title and description//
     handleInputChange = key => (e) =>{
         this.setState({[key]: e.target.value});
         console.log(this.state)
     };
-    
+
+    //for handling the change on status dropdown//
+    handleStatusChange = e => {
+        this.setState({status: e.target.innerText});
+    }
     render(){
         return(
             <div>
@@ -53,9 +57,9 @@ class IncidentEditForm extends Component{
                         <Form.Group>
                         <Form.Label className="t-b">Status</Form.Label>
                             <DropdownButton title={this.state.status}>
-                                <DropdownItem>Active</DropdownItem>
-                                <DropdownItem>Resolved</DropdownItem>
-                                <DropdownItem>Cancelled</DropdownItem>
+                                <DropdownItem onClick={ e => this.handleStatusChange(e)}>Active</DropdownItem>
+                                <DropdownItem onClick={ e => this.handleStatusChange(e)}>Resolved</DropdownItem>
+                                <DropdownItem onClick={ e => this.handleStatusChange(e)}>Cancelled</DropdownItem>
                             </DropdownButton>
                         </Form.Group>
                         
@@ -66,7 +70,7 @@ class IncidentEditForm extends Component{
                         </Form.Group>
 
                         <Button
-                            className="brr"
+                            className="brr "
                             type="submit" onClick={this.onSubmit}>
                             Save Changes
                         </Button>
