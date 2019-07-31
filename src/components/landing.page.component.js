@@ -70,8 +70,7 @@ export const LandingPage = () => {
                             So, all you can use all of your attention towards your customers instead of learning to use a software.
                             </Card.Text>
                         </Card.Body>
-                    </Card>               
-                    
+                    </Card>
                 </div>
             </div>
         </div>
