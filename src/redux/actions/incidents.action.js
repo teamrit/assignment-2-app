@@ -1,18 +1,26 @@
 import {deleteAuthorized, getAuthorized, postAuthorized} from "../request.handler";
 import {resolveHost} from "../helper.functions";
-import {INCIDENT} from "../constants";
-import {getIncidents, getToken, loadUserTokenFromStorage} from "./users.action";
+import {HTTP_METHOD, INCIDENT} from "../constants";
+import {getIncidents, getToken, loadUserTokenFromStorage, useBoilerplateRequestAuthorised} from "./users.action";
 
 export function createIncident(values) {
     return (dispatch, getState) => {
         if (loadUserTokenFromStorage()) {
             const request = postAuthorized(resolveHost("/incident"), getToken(), values);
             request.then(({ data }) => {
+                getIncidents()(dispatch,getState);
                 dispatch({ type: INCIDENT.CREATE.SUCCESS, payload: data });
             }).catch(error => {
                 dispatch({ type: INCIDENT.CREATE.FAILURE, payload: error });
             });
         }
+    };
+}
+
+export function changeFilter(data) {
+    return (dispatch, getState) => {
+        dispatch({ type: INCIDENT.CHANGE_FILTER.SUCCESS, payload: data });
+        getIncidents()(dispatch,getState);
     };
 }
 

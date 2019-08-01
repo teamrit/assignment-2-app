@@ -25,6 +25,9 @@ export const USER = {
     GET_MY_PROFILE: {
         SUCCESS: "GET_MY_PROFILE_SUCCESS",
         FAILURE: "GET_MY_PROFILE_FAILURE"
+    },
+    LOGGED_OUT: {
+        SUCCESS: "LOGGED_OUT_SUCCESS"
     }
 };
 
@@ -40,13 +43,22 @@ export const INCIDENT = {
   DELETE: {
       SUCCESS: "DELETE_INCIDENT_SUCCESS",
       FAILURE: "DELETE_INCIDENT_FAILURE"
+  },
+  CHANGE_FILTER: {
+      SUCCESS: "CHANGE_FILTER_SUCCESS",
+      FAILURE: "CHANGE_FILTER_FAILURE"
+  },
+  RESET: {
+      SUCCESS: "RESET_SUCCESS"
   }
 };
 
 export const STATUS = {
     ACTIVE: "ACTIVE",
     DELETED: "DELETED",
-    PAUSE: "PAUSE"
+    PAUSE: "PAUSE",
+    RESOLVED: "RESOLVED",
+    CANCELLED: "CANCELLED"
 };
 
 export const HTTP_METHOD = {
