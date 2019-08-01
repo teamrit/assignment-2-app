@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Form, Button, Dropdown} from "react-bootstrap";
 import { connect } from "react-redux";
-import {getIncidentDetails} from "../redux/actions/incidents.action"
+import {editIncident, getIncidentDetails} from "../redux/actions/incidents.action"
 import DropdownButton from "react-bootstrap/DropdownButton";
 import DropdownItem from "react-bootstrap/es/DropdownItem";
 
@@ -11,7 +11,8 @@ class IncidentEditForm extends Component{
         this.state = {
             title: "",
             description: "",
-            status: ""
+            status: "",
+            incidentID: ""
         }
     }
 
@@ -25,11 +26,12 @@ class IncidentEditForm extends Component{
         this.props.getIncidentDetails(id);
         const {foundIncident} = this.props;
         if(foundIncident){
-            console.log(foundIncident);
+            console.log(foundIncident.id);
             console.log("this is from getdata");
             this.setState({title: foundIncident.title});
             this.setState({description: foundIncident.description});
             this.setState({status: foundIncident.status});
+            this.setState({incidentID: foundIncident._id});
         }
         //need to put data from foundIncident to state//
         //this.setState({title: foundIncident.title});
@@ -43,7 +45,15 @@ class IncidentEditForm extends Component{
     //for handling the change on status dropdown//
     handleStatusChange = e => {
         this.setState({status: e.target.innerText});
-    }
+    };
+
+    //method to send request to "edit" incident//
+    saveChangesPressed = (e) => {
+        e.preventDefault();
+        const { title, description, status, id} = this.state;
+        this.props.editIncident({ title, description, status, id});
+    };
+
     render(){
         return(
             <div>
@@ -70,6 +80,7 @@ class IncidentEditForm extends Component{
                         </Form.Group>
 
                         <Button
+                            onClick={this.saveChangesPressed}
                             className="brr "
                             type="submit" onClick={this.onSubmit}>
                             Save Changes
@@ -81,4 +92,4 @@ class IncidentEditForm extends Component{
     };
 };
 
-export default connect((state => state.incident), {getIncidentDetails}) (IncidentEditForm);
+export default connect((state => state.incident), {getIncidentDetails, editIncident}) (IncidentEditForm);

@@ -1,4 +1,4 @@
-import {deleteAuthorized, getAuthorized, postAuthorized} from "../request.handler";
+import {deleteAuthorized, getAuthorized, postAuthorized, putAuthorized} from "../request.handler";
 import {resolveHost} from "../helper.functions";
 import {INCIDENT} from "../constants";
 import {getIncidents, getToken, loadUserTokenFromStorage} from "./users.action";
@@ -35,10 +35,21 @@ export function getIncidentDetails(id) {
     return(dispatch, getState) => {
         const request = getAuthorized(resolveHost(`/incident/${id}`), getToken());
         request.then(({data}) => {
-            dispatch({type: INCIDENT.DETAILS.SUCCESS, payload: data})
+            dispatch({type: INCIDENT.DETAILS.SUCCESS, payload: data});
             getIncidents()(dispatch,getState);
         }).catch(error => {
             dispatch({ type: INCIDENT.DETAILS.FAILURE, payload: error });
+        });
+    }
+}
+
+export function editIncident(values) {
+    return(dispatch, getState) => {
+        const request = putAuthorized(resolveHost(`/incident/${values.id}`), getToken(), values);
+        request.then(({data}) => {
+           dispatch({type: INCIDENT.EDIT.SUCCESS, payload: data});
+        }).catch(error => {
+            dispatch({type: INCIDENT.EDIT.FAILURE, payload: error})
         });
     }
 }
