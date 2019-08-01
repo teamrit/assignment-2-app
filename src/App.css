@@ -179,3 +179,14 @@
 .reasons-tag{
   text-decoration: underline;
 }
+
+/*for footer*/
+.footer{
+  padding: 1%;
+  background-color: #343940;
+  text-align: center
+}
+
+.footer-content{
+  color: white;
+}
