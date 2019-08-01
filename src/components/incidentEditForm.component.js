@@ -1,13 +1,15 @@
 import React, {Component} from "react";
-import {Form, Button, Dropdown} from "react-bootstrap";
+import {Form, Button, Dropdown,Alert} from "react-bootstrap";
 import { connect } from "react-redux";
 import {editIncident, getIncidentDetails} from "../redux/actions/incidents.action"
 import DropdownButton from "react-bootstrap/DropdownButton";
 import DropdownItem from "react-bootstrap/es/DropdownItem";
+import {createStatusBackground} from "./incident.status";
+import {toTitleCase} from "../redux/helper.functions";
 
 class IncidentEditForm extends Component{
     constructor(props){
-        super(props)
+        super(props);
         this.state = {
             title: "",
             description: "",
@@ -26,20 +28,17 @@ class IncidentEditForm extends Component{
         this.props.getIncidentDetails(id);
         const {foundIncident} = this.props;
         if(foundIncident){
-            console.log(foundIncident.id);
-            console.log("this is from getdata");
             this.setState({title: foundIncident.title});
             this.setState({description: foundIncident.description});
             this.setState({status: foundIncident.status});
             this.setState({incidentID: foundIncident._id});
         }
         //need to put data from foundIncident to state//
-        //this.setState({title: foundIncident.title});
     };
+
     //for handle change on title and description//
     handleInputChange = key => (e) =>{
         this.setState({[key]: e.target.value});
-        console.log(this.state)
     };
 
     //for handling the change on status dropdown//
@@ -50,27 +49,79 @@ class IncidentEditForm extends Component{
     //method to send request to "edit" incident//
     saveChangesPressed = (e) => {
         e.preventDefault();
-        const { title, description, status, id} = this.state;
-        this.props.editIncident({ title, description, status, id});
+        const { title, description, status, id,incidentID} = this.state;
+        this.props.editIncident({ title, description, status, id: incidentID});
     };
 
-    render(){
+    componentWillReceiveProps(nextProps) {
+        const {foundIncident} = nextProps;
+        if(foundIncident){
+            this.setState({title: foundIncident.title});
+            this.setState({description: foundIncident.description});
+            this.setState({status: foundIncident.status});
+            this.setState({incidentID: foundIncident._id});
+        }
+    }
+
+    compareIncidents = (state,props) => {
+        const {title,description,_id,status} = props.foundIncident || {};
+        let count = 0;
+        state.title !== title && count++;
+        state.description !== description && count++;
+        state.status !== status && count++;
+        return count === 0 ? `No new modifications` :
+            count === 1 ? `${count} modification` : `${count} modifications`;
+    };
+
+    render() {
+        const {status} = this.state;
         return(
             <div>
-                <div className="container incident-form align-self-left">
+                <div className="container pt-3 align-self-left">
                     <Form>
+                        <Alert variant="info">
+                            <div className="">
+                                <div className="text-black">{this.compareIncidents(this.state,this.props)}</div>
+                                <div className="d-flex align-items-end justify-content-end">
+                                    <Button
+                                        onClick={this.saveChangesPressed}
+                                        className="brr mr-2"
+                                        type="submit">
+                                        Save Changes
+                                    </Button>
+                                    <Button
+                                        onClick={()=>window.location.href+=""}
+                                        className="brr"
+                                        variant="light"
+                                        type="submit">
+                                        Cancel
+                                    </Button>
+                                </div>
+                            </div>
+
+                        </Alert>
+
+
                         <Form.Group>
                             <Form.Label className="t-b">Title</Form.Label>
                             <Form.Control type="Title" value={this.state.title} onChange={this.handleInputChange("title")} placeholder="Enter a title for incident"/>
                         </Form.Group>
 
                         <Form.Group>
-                        <Form.Label className="t-b">Status</Form.Label>
-                            <DropdownButton title={this.state.status}>
-                                <DropdownItem onClick={ e => this.handleStatusChange(e)}>Active</DropdownItem>
+
+
+                            <Form.Label className="t-b">Status</Form.Label>
+                            <Dropdown>
+                                <Dropdown.Toggle id="dropdown-basic" variant={createStatusBackground(status)}>
+                                    {toTitleCase(status)}
+                                </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                <DropdownItem onClick={this.handleStatusChange}>Active</DropdownItem>
                                 <DropdownItem onClick={ e => this.handleStatusChange(e)}>Resolved</DropdownItem>
                                 <DropdownItem onClick={ e => this.handleStatusChange(e)}>Cancelled</DropdownItem>
-                            </DropdownButton>
+                            </Dropdown.Menu>
+                        </Dropdown>
+
                         </Form.Group>
                         
 
@@ -81,8 +132,8 @@ class IncidentEditForm extends Component{
 
                         <Button
                             onClick={this.saveChangesPressed}
-                            className="brr "
-                            type="submit" onClick={this.onSubmit}>
+                            className="brr mt-3"
+                            type="submit">
                             Save Changes
                         </Button>
                     </Form>
