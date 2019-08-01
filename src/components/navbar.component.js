@@ -13,12 +13,12 @@ const NavItem = (props) => {
 };
 
 export const NavItemIcon = ({icon = ''}) => {
-  return (
-      <React.Fragment>
-          <i className={`fas ${icon}`}/>&nbsp;{" "}
-      </React.Fragment>
-  )
-};
+    return (
+        <React.Fragment>
+            <i className={`fas ${icon}`}/>&nbsp;{" "}
+        </React.Fragment>
+    )
+  };
 
 class NavigationBar extends Component {
     render() {

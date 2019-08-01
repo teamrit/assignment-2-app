@@ -50,7 +50,15 @@ export const INCIDENT = {
   },
   RESET: {
       SUCCESS: "RESET_SUCCESS"
-  }
+  },
+    EDIT: {
+        SUCCESS: "EDIT_INCIDENT_SUCCESS",
+        FAILURE: "EDIT_INCIDENT_FAILURE"
+    },
+    DETAILS: {
+        SUCCESS: "DETAILS_INCIDENT_SUCCESS",
+        FAILURE: "DETAILS_INCIDENT_FAILURE"
+    }
 };
 
 export const STATUS = {

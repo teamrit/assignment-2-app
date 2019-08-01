@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from "react-router-dom";
 import NavigationBar, {NavItemIcon} from "./navbar.component";
 import connect from "react-redux/es/connect/connect";
 import {getIncidents, getUserProfile, loadUserTokenFromStorage, signIn} from "../redux/actions/users.action";
@@ -9,6 +10,7 @@ import {IncidentListItem} from "./incident.list.item";
 import {IncidentListType} from "./incident.list.type";
 import {IncidentFilter} from "./incident.filter";
 import {IncidentTable} from "./incident.table";
+import IncidentEditForm from "./incidentEditForm.component"
 
 class IncidentsList extends Component {
 
@@ -62,7 +64,7 @@ class IncidentsList extends Component {
                     <Tabs defaultActiveKey="profile"
                           // activeKey={}
                         >
-                        <Tab eventKey="profile"
+                    <Tab eventKey="profile"
                                   title={<div className="t-b"><NavItemIcon icon={"fa-list"}/>All incidents</div>}
                         >
                             <div className="mt-4"/>

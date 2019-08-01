@@ -169,7 +169,6 @@
   0% {
     opacity: 0.3
   }
-
   10% {
     opacity: 1
   }
@@ -191,4 +190,22 @@
   100% {
     opacity: 0.3
   }
+}
+
+/*landing page*/
+.feature-card{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto; 
+  width: 18rem;
+  margin-top: 5%;
+  margin-bottom: 5%; 
+}
+
+.card-block{
+  font-size: 700%;
+}
+
+.reasons-tag{
+  text-decoration: underline;
 }

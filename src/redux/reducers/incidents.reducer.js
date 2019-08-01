@@ -33,6 +33,10 @@ function incidentReducer(state = initialState, action) {
             });
         case INCIDENT.RESET.SUCCESS:
             return initialState;
+        case INCIDENT.DETAILS.SUCCESS:
+            return Object.assign({}, state, {
+               foundIncident: action.payload
+            });
         default:
             return state;
     }

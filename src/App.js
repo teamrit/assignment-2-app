@@ -22,14 +22,10 @@ class AppI extends React.Component {
         this.props.loadUser();
     }
 
-
     render() {
         return (
             <div className="App">
-                <NavigationBar />
-
                 <Route path="/" exact component={LandingPage} />
-
                 <Route path="/login/" component={SignIn} />
                 <Route path="/logout" component={Logout} />
                 <Route path="/signup/" component={SignUp} />
@@ -37,6 +33,7 @@ class AppI extends React.Component {
 
                 <Route path="/incidents/" exact component={IncidentsList} />
                 <Route path="/incident/:id/:page" component={IncidentItem} />
+                <Route path="/incident/:id/edit" component={IncidentEdit} />
 
                 <Route path="/users" exact component={UserList} />
                 <Route path="/users/:page" component={UserList} />
