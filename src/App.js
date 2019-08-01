@@ -14,23 +14,32 @@ import Logout from "./components/logout.component";
 import {loadUserTokenFromStorage} from "./redux/actions/users.action";
 import UserList from "./components/users.list";
 import IncidentItem from "./components/incident.item";
+import NavigationBar from "./components/navbar.component";
 
 class AppI extends React.Component {
+
+    componentDidMount() {
+        this.props.loadUser();
+    }
+
+
     render() {
         return (
             <div className="App">
+                <NavigationBar />
+
                 <Route path="/" exact component={LandingPage} />
 
                 <Route path="/login/" component={SignIn} />
                 <Route path="/logout" component={Logout} />
                 <Route path="/signup/" component={SignUp} />
 
+
                 <Route path="/incidents/" exact component={IncidentsList} />
                 <Route path="/incident/:id/:page" component={IncidentItem} />
 
-                <Route path="/users/" exact component={UserList} />
-                <Route path="/user/:page" exact component={UserList} />
-                <Route path="/users/:page" exact component={UserList} />
+                <Route path="/users" exact component={UserList} />
+                <Route path="/users/:page" component={UserList} />
             </div>
         );
     }
