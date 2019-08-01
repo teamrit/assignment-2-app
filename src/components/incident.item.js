@@ -6,7 +6,6 @@ import {Switch,Route} from "react-router-dom";
 const IncidentItem = (props) => {
     return (
         <React.Fragment>
-            <NavigationBar />
             <Container>
                 <h1 className="t-b pt-3 pb-3">Incident Item </h1>
                 <Switch>
