@@ -14,7 +14,6 @@ export const Feature = ({imgSource='',title}) => {
 export const LandingPage = () => {
     return (
         <div>
-            <NavigationBar />
             <Jumbotron className="mb-0">
                 <h1 className="t-b mb-1">Welcome to Incible!</h1>
                 <p>

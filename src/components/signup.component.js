@@ -38,7 +38,6 @@ export class SignUp extends Component {
 
     render() {
         const {email,password,firstName,lastName,confirmPassword,showResponse} = this.state;
-        console.log(this.state.user);
         return (
             <div className="mh-100 bg-jazz">
                 <div className="mh-100 bg-ripple aligner">
@@ -104,9 +103,9 @@ export class SignUp extends Component {
                                                 />
                                                 <Form.Group controlId="exampleForm.ControlSelect1">
                                                     <Form.Label className={"t-b"}>Account type</Form.Label>
-                                                    <Form.Control as="select">
-                                                        <option>Admin</option>
-                                                        <option>Standard User</option>
+                                                    <Form.Control as="select" onChange={e => console.log(e.target.value)}>
+                                                        <option value="ADMIN">Admin</option>
+                                                        <option value="STANDARD_USER">Standard User</option>
                                                     </Form.Control>
                                                 </Form.Group>
                                                 <div className="form-check">
