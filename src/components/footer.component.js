@@ -4,7 +4,7 @@ import  {Navbar} from "react-bootstrap/Navbar";
 const Footer = () => {
     return(
         <div>
-            <footer class="footer">
+            <footer class="footer navbar-static-bottom">
                 <div>
                     <span className="footer-content">Copyright &copy; 2018 Incible.</span>
                 </div>
