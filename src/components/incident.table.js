@@ -35,12 +35,12 @@ export const IncidentTable = ({incidents,deleteHandler}) => {
                     <td>{beautifyDate(i.createdOn)}</td>
                     <td className="text-white">
                         <Link to={`/incident/${i._id}/edit`}>
-                            <Button size="sm" variant="info" className="mr-2" >
+                            <Button size="sm" variant="info" className="mr-2 mb-2" >
                                 Edit
                             </Button>
                         </Link>
 
-                        <Button size="sm" variant="danger" onClick={deleteHandler(i._id)}>
+                        <Button size="sm" variant="danger" onClick={deleteHandler(i._id)} className="mb-2">
                             Delete
                         </Button>
                     </td>

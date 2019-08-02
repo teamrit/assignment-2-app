@@ -6,7 +6,7 @@ const initialState = {
     fetchDate: null,
     error: {},
     filter: {
-        status: "Open"
+        status: "New"
     }
 };
 

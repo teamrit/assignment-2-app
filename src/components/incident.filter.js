@@ -26,7 +26,7 @@ export const IncidentFilter = ({onChangeOption,selected}) => {
             <IncidentFilterOption
                 onChangeOption={onChangeOption}
                 selected={selected}
-                label="Open"
+                label="New"
             />
             <IncidentFilterOption
                 onChangeOption={onChangeOption}
