@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import logo from "../incible-logo.png";
 import {Link} from "react-router-dom"
+import connect from "react-redux/es/connect/connect";
+import {highlightNavigationItem} from "../redux/helper.functions";
 
 const NavItem = (props) => {
-    return (<li className="nav-item">
+    return (<li className={`ml-1 pl-1 nav-item navi ${props.className} ${highlightNavigationItem(props.href,window.location.pathname) && 'nav-a'}`}>
         <Link to={props.href} className="nav-link">
             {props.children}
         </Link>
@@ -19,41 +21,67 @@ export const NavItemIcon = ({icon = ''}) => {
   };
 
 class NavigationBar extends Component {
-    render() {
-        return (
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                <Link className="navbar-brand" to="/">
-                    <div>
-                        <i class="fas fa-italic"></i>ncible
-                    </div>
-                </Link>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
-                        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"/>
-                </button>
 
-                <div className="collapse navbar-collapse" id="navbarColor01">
-                    <ul className="navbar-nav mr-auto">
-                        <NavItem href={"/"}>
-                            Home <span className="sr-only">(current)</span>
-                        </NavItem>
-                        <NavItem href={"/incidents"}>
-                            Incidents
-                        </NavItem>
-                        <NavItem href={"/features"}>
-                            Features
-                        </NavItem>
-                        <NavItem href={"/pricing"}>
-                            Pricing
-                        </NavItem>
-                        <NavItem href={"/about"}>
-                            About
-                        </NavItem>
-                    </ul>
-                </div>
-            </nav>
+    shouldComponentUpdate(nextProps, nextState) {
+        // if (nextProps.)
+        return true;
+    }
+
+    render() {
+        const {isLoggedIn, userProfile} = this.props;
+        return (
+            <React.Fragment>
+                <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <Link className="navbar-brand" to="/">
+                        <img src={logo} className="w-logo" alt=""/>
+                    </Link>
+                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+                            aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"/>
+                    </button>
+
+                    <div className="collapse navbar-collapse" id="navbarColor01">
+                        <ul className="navbar-nav mr-auto">
+                            <NavItem href={"/"}>
+                                <NavItemIcon icon={'fa-home'} />
+                                Home <span className="sr-only">(current)</span>
+                            </NavItem>
+                            <NavItem href={"/incidents"}>
+                                <NavItemIcon icon={'fa-indent'} />
+                                Incidents
+                            </NavItem>
+                            <NavItem href={"/users"}>
+                                <NavItemIcon icon={'fa-user-friends'} />
+                                Users
+                            </NavItem>
+                        </ul>
+                        <ul className={"navbar-nav float-right"}>
+                            {isLoggedIn && (
+                                <div className="text-white text-center" style={{padding:8}}>
+                                    Hey! {userProfile.firstName}
+                                </div>
+                            )}
+                            {isLoggedIn && (
+                                <NavItem className={"float-right"} href={"/logout"}>
+                                    <NavItemIcon icon={'fa-sign-out-alt'} />Logout
+                                </NavItem>
+                            )}
+                            {!isLoggedIn && (
+                                <NavItem className={"float-right"} href={"/signup"}>
+                                    Signup
+                                </NavItem>
+                            )}
+                            {!isLoggedIn && (
+                                <NavItem className={"float-right"} href={"/login"}>
+                                    Login
+                                </NavItem>
+                            )}
+                        </ul>
+                    </div>
+                </nav>
+            </React.Fragment>
         );
     }
 }
 
-export default NavigationBar;
+export default connect((state => ({...state.user,...state.incident})), {})(NavigationBar);

@@ -1,10 +1,13 @@
-import {INCIDENT} from "../constants";
+import {INCIDENT, INCIDENT_STATUS_MAPPER} from "../constants";
 
 const initialState = {
     incidents: [],
     incident: {},
     fetchDate: null,
-    error: {}
+    error: {},
+    filter: {
+        status: "New"
+    }
 };
 
 function incidentReducer(state = initialState, action) {
@@ -21,13 +24,21 @@ function incidentReducer(state = initialState, action) {
             return Object.assign({}, state, {
                 incident: action.payload
             });
+        case INCIDENT.CHANGE_FILTER.SUCCESS:
+            return Object.assign({}, state, {
+                filter: {
+                    ...state.filter,
+                    ...action.payload
+                }
+            });
+        case INCIDENT.RESET.SUCCESS:
+            return initialState;
         case INCIDENT.DETAILS.SUCCESS:
             return Object.assign({}, state, {
                foundIncident: action.payload
             });
-
         default:
-            return state
+            return state;
     }
 }
 

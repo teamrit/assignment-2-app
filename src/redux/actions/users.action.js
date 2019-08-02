@@ -1,6 +1,6 @@
 import axios from "axios";
 import {USER, INCIDENT, HTTP_METHOD} from "../constants";
-import {resolveHost} from "../helper.functions";
+import {resolveHost, stringifyRequest} from "../helper.functions";
 import {deleteAuthorized, getAuthorized, postAuthorized, putAuthorized} from "../request.handler";
 
 /**
@@ -75,7 +75,6 @@ export function getUserProfile() {
 export function signUpUser(user) {
     return (dispatch, getState) => {
         const request = axios.post(resolveHost("/user/register"), user);
-        console.log(user)
         request.then(({ data }) => {
             dispatch({ type: USER.SIGN_UP.SUCCESS, payload: data });
         }).catch(e => {
@@ -88,6 +87,7 @@ export function logout() {
     return (dispatch, getState) => {
         resetUserToken();
         dispatch({type: USER.SIGN_OUT.SUCCESS, payload: {}});
+        dispatch({type: INCIDENT.RESET.SUCCESS, payload: {}});
     };
 }
 
@@ -117,9 +117,11 @@ export function loadUserTokenFromStorage() {
         let token = sessionStorage.getItem("jwtToken");
         if(!token || token === "") {
             // Return if no token
+            dispatch({type: USER.LOGGED_OUT.SUCCESS, payload: token });
             return;
         }
         dispatch({type: USER.SET.TOKEN, payload: token });
+        dispatch({type: USER.GET_MY_PROFILE});
         return true;
     };
 }
@@ -131,7 +133,8 @@ export const getToken = () => {
 export function getIncidents() {
     return (dispatch, getState) => {
         if (loadUserTokenFromStorage()) {
-            const request = getAuthorized(resolveHost("/incident"), getToken());
+            const state = getState();
+            const request = getAuthorized(resolveHost(`/incident?${stringifyRequest(state.incident.filter)}`), getToken());
             request.then(({ data }) => {
                 dispatch({ type: INCIDENT.GET.SUCCESS, payload: data });
             }).catch(error => {

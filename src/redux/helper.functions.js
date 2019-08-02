@@ -21,9 +21,16 @@ export const toTitleCase = (str) => {
     );
 };
 
-export const assignTabToRoute = (page) => {
-
-};
+export function stringifyRequest(obj) {
+    let str = "";
+    for (let key in obj) {
+        if (str !== "") {
+            str += "&";
+        }
+        str += key + "=" + encodeURIComponent(obj[key]);
+    }
+    return str;
+}
 
 /**
  *
@@ -35,4 +42,10 @@ export const beautifyDate = dateString => {
         return `${getDayName(date)}, ${date.getDate()} ${getMonthName(date)}, ${date.getFullYear()}`;
     }
     return ""
+};
+
+export const highlightNavigationItem = (href,page) => {
+    const part = (page.split("/"))[1];
+    console.log(part,page);
+    return `/${part}` === href || `/${part}s` === href;
 };

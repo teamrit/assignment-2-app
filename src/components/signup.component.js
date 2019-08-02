@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import {signUpUser} from "../redux/actions/users.action";
 import {Toast,Form} from "react-bootstrap";
 import {CenteredLogo} from "./centered.logo";
-import ReactDOM from "react-dom";
 import {SignUpInput} from "./signup.input";
 import {Modal} from "./portal";
 import {Toaster} from "./toast.component";
@@ -19,26 +18,24 @@ export class SignUp extends Component {
             firstName: "",
             lastName: "",
             confirmPassword: "",
-            showResponse: true
+            showResponse: true,
+            userType: ""
         }
-        this.el = document.createElement('div');
     }
 
     onChange = key => (e) => {
-        console.warn(e,key);
         this.setState({[key] : e.target.value})
     };
 
     signUp = (e) => {
         e.preventDefault();
-        const {email,password,firstName,lastName} = this.state;
-        this.props.signUpUser({email,password,firstName,lastName});
+        const {email,password,firstName,lastName,accountType} = this.state;
+        this.props.signUpUser({email,password,firstName,lastName,accountType});
     };
 
 
     render() {
         const {email,password,firstName,lastName,confirmPassword,showResponse} = this.state;
-        console.log(this.state.user);
         return (
             <div className="mh-100 bg-jazz">
                 <div className="mh-100 bg-ripple aligner">
@@ -104,9 +101,12 @@ export class SignUp extends Component {
                                                 />
                                                 <Form.Group controlId="exampleForm.ControlSelect1">
                                                     <Form.Label className={"t-b"}>Account type</Form.Label>
-                                                    <Form.Control as="select">
-                                                        <option>Admin</option>
-                                                        <option>Standard User</option>
+                                                    <Form.Control
+                                                        as="select"
+                                                        onChange={this.onChange("accountType")}
+                                                    >
+                                                        <option value="ADMIN">Admin</option>
+                                                        <option value="STANDARD_USER">Standard User</option>
                                                     </Form.Control>
                                                 </Form.Group>
                                                 <div className="form-check">

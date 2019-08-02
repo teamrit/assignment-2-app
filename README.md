@@ -10,6 +10,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 | SessionStorage | Usage of browser storage for storing token to avoid constant logins | `users.reducer.js` |
 | Redux Thunk    | To perform functions and API requests asynchronously                | `store.js`         |
 | Favicon | Add custom favicon icon converted online                                   | `favi.ico`              |
-|                |                                                                     |                    |
+|Code Splitting                | One of the components is loaded on click, to decrease the initial bundle size |                    |
 |                |                                                                     |                    |
 |                |                                                                     |                    |

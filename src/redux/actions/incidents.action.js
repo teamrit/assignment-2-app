@@ -1,18 +1,26 @@
 import {deleteAuthorized, getAuthorized, postAuthorized, putAuthorized} from "../request.handler";
 import {resolveHost} from "../helper.functions";
-import {INCIDENT} from "../constants";
-import {getIncidents, getToken, loadUserTokenFromStorage} from "./users.action";
+import {HTTP_METHOD, INCIDENT} from "../constants";
+import {getIncidents, getToken, loadUserTokenFromStorage, useBoilerplateRequestAuthorised} from "./users.action";
 
 export function createIncident(values) {
     return (dispatch, getState) => {
         if (loadUserTokenFromStorage()) {
             const request = postAuthorized(resolveHost("/incident"), getToken(), values);
             request.then(({ data }) => {
+                getIncidents()(dispatch,getState);
                 dispatch({ type: INCIDENT.CREATE.SUCCESS, payload: data });
             }).catch(error => {
                 dispatch({ type: INCIDENT.CREATE.FAILURE, payload: error });
             });
         }
+    };
+}
+
+export function changeFilter(data) {
+    return (dispatch, getState) => {
+        dispatch({ type: INCIDENT.CHANGE_FILTER.SUCCESS, payload: data });
+        getIncidents()(dispatch,getState);
     };
 }
 
@@ -26,6 +34,26 @@ export function deleteIncident(id) {
                 getIncidents()(dispatch,getState);
             }).catch(error => {
                 dispatch({ type: INCIDENT.DELETE.FAILURE, payload: error });
+            });
+        }
+    }
+}
+
+/**
+ * Should have Id and the note to be posted in the requestData
+ * @param requestData
+ * @returns {Function}
+ */
+export function postIncidentNarrative(requestData) {
+    return(dispatch, getState) => {
+        if(loadUserTokenFromStorage()) {
+            const request = postAuthorized(resolveHost(`/incident/narrative`), getToken(), requestData);
+            request.then(({data}) => {
+                dispatch({ type: INCIDENT.ADD_NARRATIVE.SUCCESS, payload: data });
+                // To keep the true state with the database
+                getIncidentDetails(requestData.id)(dispatch,getState);
+            }).catch(error => {
+                dispatch({ type: INCIDENT.ADD_NARRATIVE.FAILURE, payload: error });
             });
         }
     }
@@ -48,6 +76,7 @@ export function editIncident(values) {
         const request = putAuthorized(resolveHost(`/incident/${values.id}`), getToken(), values);
         request.then(({data}) => {
            dispatch({type: INCIDENT.EDIT.SUCCESS, payload: data});
+           getIncidentDetails(values.id)(dispatch,getState);
         }).catch(error => {
             dispatch({type: INCIDENT.EDIT.FAILURE, payload: error})
         });
