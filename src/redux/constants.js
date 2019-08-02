@@ -34,7 +34,7 @@ export const USER = {
 export const INCIDENT = {
   GET : {
       SUCCESS: "GET_INCIDENTS_SUCCESS",
-      FAILURE: "GET_INCIDENTS_FAIL"
+      FAILURE: "GET_INCIDENTS_FAILURE"
   },
   CREATE : {
       SUCCESS: "POST_INCIDENT_SUCCESS",
@@ -51,6 +51,10 @@ export const INCIDENT = {
   RESET: {
       SUCCESS: "RESET_SUCCESS"
   },
+    ADD_NARRATIVE: {
+        SUCCESS: "ADD_NARRATIVE_SUCCESS",
+        FAILURE: "ADD_NARRATIVE_FAILURE"
+    },
     EDIT: {
         SUCCESS: "EDIT_INCIDENT_SUCCESS",
         FAILURE: "EDIT_INCIDENT_FAILURE"
@@ -74,4 +78,11 @@ export const HTTP_METHOD = {
   POST: "POST",
   PUT: "PUT",
   DELETE: "DELETE"
+};
+
+export const LOADING = {
+    SPINNER : {
+        START: "START_SPINNER",
+        STOP: "STOP_SPINNER"
+    }
 };

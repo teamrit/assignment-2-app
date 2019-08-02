@@ -1,6 +1,5 @@
-import React, {Component} from 'react';
-import NavigationBar, {NavItemIcon} from "./navbar.component";
-import {Container, Tab, Tabs} from "react-bootstrap";
+import React from 'react';
+import {Container} from "react-bootstrap";
 import {Switch,Route} from "react-router-dom";
 
 const IncidentItem = (props) => {
@@ -8,14 +7,11 @@ const IncidentItem = (props) => {
         console.log(props)
     };
 
+    const {page} = props.match.params;
     return (
         <React.Fragment>
             <Container>
-                <h1 className="t-b pt-3 pb-3">Incident Item </h1>
-                <Switch>
-                    <Route path="/incident/:id/details" component={() => <div>Details</div>} />
-                    <Route path="/incident/:id/edit" component={() => <div>Edit</div>} />
-                </Switch>
+                <h1 className="t-b pt-3 pb-3">{page == "edit" && "Edit "}Incident Item </h1>
             </Container>
         </React.Fragment>
     );

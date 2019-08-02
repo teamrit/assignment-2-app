@@ -21,10 +21,17 @@ export const NavItemIcon = ({icon = ''}) => {
   };
 
 class NavigationBar extends Component {
+
+    shouldComponentUpdate(nextProps, nextState) {
+        // if (nextProps.)
+        return true;
+    }
+
     render() {
         const {isLoggedIn, userProfile} = this.props;
         return (
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <React.Fragment>
+                <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                     <Link className="navbar-brand" to="/">
                         <img src={logo} className="w-logo" alt=""/>
                     </Link>
@@ -46,18 +53,6 @@ class NavigationBar extends Component {
                             <NavItem href={"/users"}>
                                 <NavItemIcon icon={'fa-user-friends'} />
                                 Users
-                            </NavItem>
-                            <NavItem href={"/features"}>
-                                <NavItemIcon icon={'fa-star'} />
-                                Features
-                            </NavItem>
-                            <NavItem href={"/pricing"}>
-                                <NavItemIcon icon={'fa-dollar-sign'} />
-                                Pricing
-                            </NavItem>
-                            <NavItem href={"/about"}>
-                                <NavItemIcon icon={'fa-info-circle'} />
-                                About
                             </NavItem>
                         </ul>
                         <ul className={"navbar-nav float-right"}>
@@ -84,9 +79,9 @@ class NavigationBar extends Component {
                         </ul>
                     </div>
                 </nav>
+            </React.Fragment>
         );
     }
 }
 
-export default connect((state => state.user), {
-})(NavigationBar);
+export default connect((state => ({...state.user,...state.incident})), {})(NavigationBar);

@@ -33,6 +33,11 @@ export const IncidentFilter = ({onChangeOption,selected}) => {
                 selected={selected}
                 label="Resolved"
             />
+            <IncidentFilterOption
+                onChangeOption={onChangeOption}
+                selected={selected}
+                label="Cancelled"
+            />
 
         </Dropdown.Menu>
     </Dropdown>)

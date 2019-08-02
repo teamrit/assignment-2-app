@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Form, Button, Dropdown,Alert} from "react-bootstrap";
 import { connect } from "react-redux";
-import {editIncident, getIncidentDetails} from "../redux/actions/incidents.action"
+import {editIncident, getIncidentDetails, postIncidentNarrative} from "../redux/actions/incidents.action"
 import DropdownButton from "react-bootstrap/DropdownButton";
 import DropdownItem from "react-bootstrap/es/DropdownItem";
 import {createStatusBackground} from "./incident.status";
@@ -14,7 +14,8 @@ class IncidentEditForm extends Component{
             title: "",
             description: "",
             status: "",
-            incidentID: ""
+            incidentID: "",
+
         }
     }
 
@@ -60,10 +61,12 @@ class IncidentEditForm extends Component{
             this.setState({description: foundIncident.description});
             this.setState({status: foundIncident.status});
             this.setState({incidentID: foundIncident._id});
+            this.setState({narrative: foundIncident.narrative});
         }
     }
 
     compareIncidents = (state,props) => {
+        if (!props.foundIncident) return false;
         const {title,description,_id,status} = props.foundIncident || {};
         let count = 0;
         state.title !== title && count++;
@@ -73,15 +76,20 @@ class IncidentEditForm extends Component{
             count === 1 ? `${count} modification` : `${count} modifications`;
     };
 
+    postNarrative = () => {
+        const {incidentID,newNarrative} = this.state;
+        this.props.postIncidentNarrative({id:incidentID,note:newNarrative});
+    };
+
     render() {
-        const {status} = this.state;
+        let {status,narrative = [],newNarrative} = this.state;
         return(
             <div>
                 <div className="container pt-3 align-self-left">
                     <Form>
                         <Alert variant="info">
-                            <div className="">
-                                <div className="text-black">{this.compareIncidents(this.state,this.props)}</div>
+                            <div className="d-inline">
+                                <div className="text-black t-b">{this.compareIncidents(this.state,this.props)}</div>
                                 <div className="d-flex align-items-end justify-content-end">
                                     <Button
                                         onClick={this.saveChangesPressed}
@@ -111,7 +119,7 @@ class IncidentEditForm extends Component{
 
 
                             <Form.Label className="t-b">Status</Form.Label>
-                            <Dropdown>
+                            <Dropdown disabled>
                                 <Dropdown.Toggle id="dropdown-basic" variant={createStatusBackground(status)}>
                                     {toTitleCase(status)}
                                 </Dropdown.Toggle>
@@ -130,11 +138,49 @@ class IncidentEditForm extends Component{
                             <Form.Control as="textarea" rows="3" value={this.state.description} onChange={this.handleInputChange("description")} placeholder="Enter a description for incident" />
                         </Form.Group>
 
+                        <Form.Group>
+                            <Form.Label className="t-b">Narrative</Form.Label>
+                            <Form.Control as="textarea" rows="3" value={newNarrative} onChange={this.handleInputChange("newNarrative")} placeholder="Add a new narrative" />
+                            <Button
+                                variant="success"
+                                onClick={this.postNarrative}
+                                className="mt-3">
+                                Add
+                            </Button>
+                        </Form.Group>
+
+                        <Dropdown.Divider/>
+
+                        <Form.Label className="t-b">Narrative history</Form.Label> <br/>
+
+                        {narrative == false &&
+                            <Alert variant="warning" className="p-5">
+                                Incident currently doesn't have any narrative history
+                            </Alert>
+                        }
+
+                        {narrative.map(n => {
+                            return <div key={n.timestamp} className="alert alert-info p-3 d-flex justify-content-between">
+                                <h6>{n.note}</h6>
+                                <p className="float-right">
+                                    {new Date(n.timestamp).toLocaleDateString()}{"    "}
+                                    {new Date(n.timestamp).toLocaleTimeString()}
+                                </p>
+                            </div>
+                        })}
+
                         <Button
                             onClick={this.saveChangesPressed}
-                            className="brr mt-3"
+                            className="brr mt-3 mr-3"
                             type="submit">
                             Save Changes
+                        </Button>
+                        <Button
+                            onClick={()=>window.location.href+=""}
+                            className="brr mt-3"
+                            variant="light"
+                            type="submit">
+                            Cancel
                         </Button>
                     </Form>
                 </div>
@@ -143,4 +189,4 @@ class IncidentEditForm extends Component{
     };
 };
 
-export default connect((state => state.incident), {getIncidentDetails, editIncident}) (IncidentEditForm);
+export default connect((state => state.incident), {getIncidentDetails, editIncident, postIncidentNarrative}) (IncidentEditForm);

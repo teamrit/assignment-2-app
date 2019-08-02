@@ -67,9 +67,6 @@ class UsersList extends Component {
                             eventKey="all" title={<div className="t-b"><NavItemIcon icon={"fa-users"}/>All users</div>}>
                             {users.map(r => UsersList.renderUser(r))}
                         </Tab>
-
-                        <Tab eventKey="new" title={<div className="t-b"><NavItemIcon icon={"fa-plus"}/>Create new</div>} >
-                        </Tab>
                         <Tab eventKey="profile" title={<div className="t-b"><NavItemIcon icon={"fa-user"}/>My Profile</div>} >
                             <Suspense fallback={<div>Loading...</div>}>
                                 <UserProfile user={userProfile} />

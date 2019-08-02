@@ -1,10 +1,10 @@
 import React from "react";
 import {Table,Button} from "react-bootstrap";
 import {beautifyDate, toTitleCase} from "../redux/helper.functions";
-import {NavItemIcon} from "./navbar.component";
 import {Link} from "react-router-dom";
+import {createStatusBackground} from "./incident.status";
 
-export const IncidentTable = ({incidents}) => {
+export const IncidentTable = ({incidents,deleteHandler}) => {
     return (
         <Table
             variant="dark"
@@ -29,14 +29,19 @@ export const IncidentTable = ({incidents}) => {
                         </Link>
                     </td>
                     <td>{i.description}</td>
-                    <td>{toTitleCase(i.status)}</td>
+                    <td><div className={`brr p-1 bg-${createStatusBackground(i.status)}`}></div>
+                        &nbsp;{toTitleCase(i.status)}
+                    </td>
                     <td>{beautifyDate(i.createdOn)}</td>
                     <td className="text-white">
-                        <Button size="sm" variant="info" className="mr-2">
-                            <NavItemIcon icon="fa-pencil"/>
-                        </Button>
-                        <Button size="sm" variant="danger">
-                            <NavItemIcon icon="fa-delete"/>
+                        <Link to={`/incident/${i._id}/edit`}>
+                            <Button size="sm" variant="info" className="mr-2" >
+                                Edit
+                            </Button>
+                        </Link>
+
+                        <Button size="sm" variant="danger" onClick={deleteHandler(i._id)}>
+                            Delete
                         </Button>
                     </td>
                 </tr>

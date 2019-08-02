@@ -6,7 +6,7 @@ export const Toaster = ({show,onClose,title,description}) => {
         <Toast
             onClose={onClose} show={show} delay={3000}
             // autohide
-            className={"ml-4 mb-4 shadow-lg sfb"}
+            className={"ml-4 mb-4 shadow-lg slide-top-animate"}
         >
             <Toast.Header>
                 <img
@@ -18,6 +18,7 @@ export const Toaster = ({show,onClose,title,description}) => {
                 <small>few seconds ago</small>
             </Toast.Header>
             <Toast.Body>{description}</Toast.Body>
+            <div className="pt-1 bg-rumble w-100 anim-width"/>
         </Toast>
     );
 };

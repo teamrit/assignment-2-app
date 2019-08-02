@@ -121,6 +121,7 @@ export function loadUserTokenFromStorage() {
             return;
         }
         dispatch({type: USER.SET.TOKEN, payload: token });
+        dispatch({type: USER.GET_MY_PROFILE});
         return true;
     };
 }

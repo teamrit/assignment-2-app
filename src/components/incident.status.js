@@ -8,6 +8,7 @@ export const createStatusBackground = (arg) => {
     switch (status) {
         case STATUS.ACTIVE:
             return "primary";
+        case STATUS.CANCELLED:
         case STATUS.DELETED:
             return "danger";
         case STATUS.PAUSE:

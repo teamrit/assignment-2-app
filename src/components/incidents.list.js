@@ -95,7 +95,7 @@ class IncidentsList extends Component {
                             })}
 
                             {displayType === "List" &&
-                                <IncidentTable incidents={incidents} />
+                                <IncidentTable incidents={incidents} deleteHandler={this.onDeletePressed} />
                             }
 
                         </Tab>
@@ -103,8 +103,6 @@ class IncidentsList extends Component {
                              title={<div className="t-b"><NavItemIcon icon={"fa-plus"}/>Create new</div>}
                         >
                             <IncidentForm />
-                        </Tab>
-                        <Tab eventKey="contact" title="Contact">
                         </Tab>
                     </Tabs>
                 </Container>

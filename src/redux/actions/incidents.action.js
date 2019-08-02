@@ -39,6 +39,26 @@ export function deleteIncident(id) {
     }
 }
 
+/**
+ * Should have Id and the note to be posted in the requestData
+ * @param requestData
+ * @returns {Function}
+ */
+export function postIncidentNarrative(requestData) {
+    return(dispatch, getState) => {
+        if(loadUserTokenFromStorage()) {
+            const request = postAuthorized(resolveHost(`/incident/narrative`), getToken(), requestData);
+            request.then(({data}) => {
+                dispatch({ type: INCIDENT.ADD_NARRATIVE.SUCCESS, payload: data });
+                // To keep the true state with the database
+                getIncidentDetails(requestData.id)(dispatch,getState);
+            }).catch(error => {
+                dispatch({ type: INCIDENT.ADD_NARRATIVE.FAILURE, payload: error });
+            });
+        }
+    }
+}
+
 export function getIncidentDetails(id) {
     return(dispatch, getState) => {
         const request = getAuthorized(resolveHost(`/incident/${id}`), getToken());
@@ -56,6 +76,7 @@ export function editIncident(values) {
         const request = putAuthorized(resolveHost(`/incident/${values.id}`), getToken(), values);
         request.then(({data}) => {
            dispatch({type: INCIDENT.EDIT.SUCCESS, payload: data});
+           getIncidentDetails(values.id)(dispatch,getState);
         }).catch(error => {
             dispatch({type: INCIDENT.EDIT.FAILURE, payload: error})
         });

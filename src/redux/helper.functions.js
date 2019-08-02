@@ -45,6 +45,7 @@ export const beautifyDate = dateString => {
 };
 
 export const highlightNavigationItem = (href,page) => {
-    const parts = page.split("/");
-    return `/${parts[1]}` == href
+    const part = (page.split("/"))[1];
+    console.log(part,page);
+    return `/${part}` === href || `/${part}s` === href;
 };
