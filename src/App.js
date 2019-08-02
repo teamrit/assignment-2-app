@@ -11,20 +11,25 @@ import store from "./redux/store";
 import IncidentsList from "./components/incidents.list";
 import connect from "react-redux/es/connect/connect";
 import Logout from "./components/logout.component";
-import {loadUserTokenFromStorage} from "./redux/actions/users.action";
+import {getUserProfile, loadUserTokenFromStorage} from "./redux/actions/users.action";
 import UserList from "./components/users.list";
 import IncidentItem from "./components/incident.item";
+import IncidentEditForm from "./components/incidentEditForm.component";
 import NavigationBar from "./components/navbar.component";
 
 class AppI extends React.Component {
 
     componentDidMount() {
         this.props.loadUser();
+        this.props.getUserProfile();
     }
 
     render() {
         return (
             <div className="App">
+
+                <Route path="/" component={NavigationBar} />
+
                 <Route path="/" exact component={LandingPage} />
                 <Route path="/login/" component={SignIn} />
                 <Route path="/logout" component={Logout} />
@@ -33,7 +38,7 @@ class AppI extends React.Component {
 
                 <Route path="/incidents/" exact component={IncidentsList} />
                 <Route path="/incident/:id/:page" component={IncidentItem} />
-                <Route path="/incident/:id/edit" component={IncidentEdit} />
+                <Route path="/incident/:id/edit" component={IncidentEditForm} />
 
                 <Route path="/users" exact component={UserList} />
                 <Route path="/users/:page" component={UserList} />
@@ -42,7 +47,7 @@ class AppI extends React.Component {
     }
 }
 
-export const App = connect((state => state), {loadUser: loadUserTokenFromStorage})(AppI);
+export const App = connect((state => state), {loadUser: loadUserTokenFromStorage, getUserProfile})(AppI);
 
 const routedApp = () => (
     <Provider store={store}>
