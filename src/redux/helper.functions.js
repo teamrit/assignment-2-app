@@ -1,5 +1,12 @@
+import {NODE_ENV} from "./constants";
+
+
 export const resolveHost = (url) => {
-    return `http://localhost:8000${url}`;
+    if (process.env.NODE_ENV == NODE_ENV.development)
+        return `http://localhost:8000${url}`;
+    else
+        // TODO: Insert Backend url here
+        return `http://localhost:8000${url}`;
 };
 
 export const getDayName = date => {
@@ -13,7 +20,11 @@ export const getMonthName = date => {
     const month = date.toLocaleString('default', { month: 'long' });
     return month
 };
-
+/**
+ * Changes the case of the string provided in the argument
+ * @returns {string}
+ * @param str
+ */
 export const toTitleCase = (str) => {
     return str.replace(
         /\w\S*/g,
@@ -21,6 +32,11 @@ export const toTitleCase = (str) => {
     );
 };
 
+/**
+ * Stringifies the request object for get requests according to the HTTP standards
+ * @param obj
+ * @returns {string}
+ */
 export function stringifyRequest(obj) {
     let str = "";
     for (let key in obj) {
@@ -44,6 +60,12 @@ export const beautifyDate = dateString => {
     return ""
 };
 
+/**
+ * Highlights the navigation item according to the current route
+ * @param href
+ * @param page
+ * @returns {boolean}
+ */
 export const highlightNavigationItem = (href,page) => {
     const part = (page.split("/"))[1];
     console.log(part,page);

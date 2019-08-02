@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import {Form, Button, Dropdown,Alert} from "react-bootstrap";
 import { connect } from "react-redux";
 import {editIncident, getIncidentDetails, postIncidentNarrative} from "../redux/actions/incidents.action"
-import DropdownButton from "react-bootstrap/DropdownButton";
 import DropdownItem from "react-bootstrap/es/DropdownItem";
 import {createStatusBackground} from "./incident.status";
 import {toTitleCase} from "../redux/helper.functions";

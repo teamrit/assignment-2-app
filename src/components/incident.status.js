@@ -6,6 +6,7 @@ import {toTitleCase} from "../redux/helper.functions";
 export const createStatusBackground = (arg) => {
     let status = arg.toUpperCase();
     switch (status) {
+        case STATUS.NEW:
         case STATUS.ACTIVE:
             return "primary";
         case STATUS.CANCELLED:

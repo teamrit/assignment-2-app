@@ -121,7 +121,6 @@ export function loadUserTokenFromStorage() {
             return;
         }
         dispatch({type: USER.SET.TOKEN, payload: token });
-        dispatch({type: USER.GET_MY_PROFILE});
         return true;
     };
 }
@@ -152,6 +151,20 @@ export function getUsers() {
                 dispatch({ type: USER.GET_LIST.SUCCESS, payload: data });
             }).catch(error => {
                 dispatch({ type: USER.GET_LIST.FAILURE, payload: error });
+            });
+        }
+    };
+}
+
+export function editUser(newData) {
+    return (dispatch, getState) => {
+        if (loadUserTokenFromStorage()) {
+            const {id} = newData;
+            const request = putAuthorized(resolveHost(`/user/${id}`), getToken(), newData);
+            request.then(({ data }) => {
+                dispatch({ type: USER.EDIT_PROFILE.SUCCESS, payload: data });
+            }).catch(error => {
+                dispatch({ type: USER.EDIT_PROFILE.FAILURE, payload: error });
             });
         }
     };

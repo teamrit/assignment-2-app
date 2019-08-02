@@ -28,6 +28,10 @@ export const USER = {
     },
     LOGGED_OUT: {
         SUCCESS: "LOGGED_OUT_SUCCESS"
+    },
+    EDIT_PROFILE: {
+        SUCCESS: "EDIT_PROFILE_SUCCESS",
+        FAILURE: "EDIT_PROFILE_FAILURE"
     }
 };
 
@@ -70,7 +74,8 @@ export const STATUS = {
     DELETED: "DELETED",
     PAUSE: "PAUSE",
     RESOLVED: "RESOLVED",
-    CANCELLED: "CANCELLED"
+    CANCELLED: "CANCELLED",
+    NEW: "NEW"
 };
 
 export const HTTP_METHOD = {
@@ -85,4 +90,9 @@ export const LOADING = {
         START: "START_SPINNER",
         STOP: "STOP_SPINNER"
     }
+};
+
+export const NODE_ENV = {
+    development : "development",
+    production: "production"
 };

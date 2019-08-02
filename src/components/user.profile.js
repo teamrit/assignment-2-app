@@ -1,10 +1,12 @@
 import React from "react";
 import {Form,Button} from 'react-bootstrap';
 import {beautifyDate} from "../redux/helper.functions";
+import connect from "react-redux/es/connect/connect";
+import {editUser} from "../redux/actions/users.action";
 
 const UserProfile = (props) => {
-    const {user = {}} = props;
-    const {firstName, lastName, email,joinedOn,lastLoggedIn} = user;
+    const {user = {},handleInputChange,firstName,lastName} = props;
+    const {email,joinedOn,lastLoggedIn} = user;
     return (
         <div className="p-2">
             <div className="bg-eggshell m-sm-2 m-xl-4 p-3 shadow-lg border rounded">
@@ -15,8 +17,23 @@ const UserProfile = (props) => {
                         </div>
                         <div className="col-xl-9 col-md-9 col-sm-12">
                             <div className="p-3">
-                                <h2 className="t-b">{firstName}{"   "}{lastName}</h2>
-                                <p>{email}</p>
+                                <div className="t-b">
+
+                                    <Form.Group>
+                                        <Form.Label className="t-b">First Name</Form.Label>
+                                        <Form.Control type="Title" value={firstName} onChange={handleInputChange("firstName")} placeholder="Enter a title for incident"/>
+                                    </Form.Group>
+
+                                    <Form.Group>
+                                        <Form.Label className="t-b">Last Name</Form.Label>
+                                        <Form.Control type="Title" value={lastName} onChange={handleInputChange("firstName")} placeholder="Enter a title for incident"/>
+                                    </Form.Group>
+
+                                    <Form.Group>
+                                        <Form.Label className="t-b">Email</Form.Label>
+                                        <Form.Control disabled type="Title" value={email} placeholder="Enter a title for incident"/>
+                                    </Form.Group>
+                                </div>
                                 <div className="pt-2">
                                     <div className="t-b">
                                         Joined on:
@@ -29,6 +46,9 @@ const UserProfile = (props) => {
                                     </div>
                                     {beautifyDate(lastLoggedIn)}
                                 </div>
+                                <div className="pt-2">
+                                    <Button onClick={() => props.editUser({...user,firstName,lastName})}>Save</Button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -38,4 +58,4 @@ const UserProfile = (props) => {
     );
 };
 
-export default UserProfile;
+export default connect((state => state.user), {editUser})(UserProfile);

@@ -47,14 +47,6 @@ export class SignUp extends Component {
                                         <div className="card-header br-major-t bg-pop text-white">
                                             <h3 className="t-b text-center">Sign Up</h3>
                                         </div>
-                                        <Modal>
-                                            <Toaster
-                                                show={showResponse}
-                                                onClose={() => {this.setState({showResponse: false})}}
-                                                title={"Sign up successfully"}
-                                                description={"Hey buddy"}
-                                            />
-                                        </Modal>
 
                                         <div className="card-body">
                                             <form>
