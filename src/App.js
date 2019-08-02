@@ -22,6 +22,7 @@ class AppI extends React.Component {
     componentDidMount() {
         this.props.loadUser();
         this.props.getUserProfile();
+        console.log(process.env.NODE_ENV);
     }
 
     render() {
