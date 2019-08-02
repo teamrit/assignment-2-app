@@ -6,7 +6,7 @@ export const resolveHost = (url) => {
         return `http://localhost:8000${url}`;
     else
         // TODO: Insert Backend url here
-        return `http://localhost:8000${url}`;
+        return `http://inciblebck.herokuapp.com${url}`;
 };
 
 export const getDayName = date => {

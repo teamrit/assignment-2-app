@@ -5,7 +5,14 @@ import connect from "react-redux/es/connect/connect";
 import {editUser} from "../redux/actions/users.action";
 
 const UserProfile = (props) => {
-    const {user = {},handleInputChange,firstName,lastName} = props;
+    const {user = {}
+        , handleInputChange
+        ,firstName,lastName} = props;
+
+    const onChange = (e) => {
+        console.log(e);
+    }
+
     const {email,joinedOn,lastLoggedIn} = user;
     return (
         <div className="p-2">
@@ -21,17 +28,22 @@ const UserProfile = (props) => {
 
                                     <Form.Group>
                                         <Form.Label className="t-b">First Name</Form.Label>
-                                        <Form.Control type="Title" value={firstName} onChange={handleInputChange("firstName")} placeholder="Enter a title for incident"/>
+                                        <Form.Control as="input"
+                                                      value={firstName}
+                                                      onChange={handleInputChange("firstName")}
+                                                      />
                                     </Form.Group>
 
                                     <Form.Group>
                                         <Form.Label className="t-b">Last Name</Form.Label>
-                                        <Form.Control type="Title" value={lastName} onChange={handleInputChange("firstName")} placeholder="Enter a title for incident"/>
+                                        <Form.Control as="input"
+                                                      value={lastName}
+                                                      onChange={handleInputChange("lastName")}/>
                                     </Form.Group>
 
                                     <Form.Group>
                                         <Form.Label className="t-b">Email</Form.Label>
-                                        <Form.Control disabled type="Title" value={email} placeholder="Enter a title for incident"/>
+                                        <Form.Control disabled type="input" value={email} placeholder="Enter a title for incident"/>
                                     </Form.Group>
                                 </div>
                                 <div className="pt-2">

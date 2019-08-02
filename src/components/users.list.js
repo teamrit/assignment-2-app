@@ -3,7 +3,6 @@ import NavigationBar, {NavItemIcon} from "./navbar.component";
 import connect from "react-redux/es/connect/connect";
 import {getUserProfile, getUsers} from "../redux/actions/users.action";
 import {Container, Dropdown, Tab, Tabs} from 'react-bootstrap';
-import Form from "../../node_modules/react-bootstrap/es/Form";
 import {UserProfile} from "./user.item";
 
 const UserLoggedInProfile = React.lazy(() => import('./user.profile'));
@@ -30,6 +29,7 @@ class UsersList extends Component {
     }
 
     handleInputChange = key => e => {
+        console.log(key,e);
         this.setState({[key]: e.target.value})
     };
 
@@ -60,7 +60,7 @@ class UsersList extends Component {
                         defaultActiveKey="home" activeKey={page}>
                         <Tab
                             eventKey="all" title={<div className="t-b"><NavItemIcon icon={"fa-users"}/>All users</div>}>
-                            {users.map(r => <UserProfile user={r} key={r._id} changeHandler={this.handleInputChange} />)}
+                            {users.map(r => <UserProfile user={r} key={r._id} />)}
                         </Tab>
                         <Tab eventKey="profile" title={<div className="t-b"><NavItemIcon icon={"fa-user"}/>My Profile</div>} >
                             <Suspense fallback={<div>Loading...</div>}>
@@ -68,7 +68,7 @@ class UsersList extends Component {
                                     firstName={firstName}
                                     lastName={lastName}
                                     user={userProfile}
-                                    handleInputChange={() => () => {}}
+                                    handleInputChange={this.handleInputChange}
                                 />
                             </Suspense>
                         </Tab>
