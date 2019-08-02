@@ -47,6 +47,10 @@ class IncidentItem extends Component {
         }
     }
 
+    redirectHandler = () => {
+        this.props.history.push("/incidents")
+    }
+
     render(){
         
         return(
@@ -64,7 +68,7 @@ class IncidentItem extends Component {
                         </Modal.Body>
 
                         <Modal.Footer>
-                            <Button variant="secondary">Close</Button>
+                            <button className= "btn btn-secondary"onClick={this.redirectHandler}>Close</button>
                         </Modal.Footer>
                     </Modal.Dialog>
                 </div>
