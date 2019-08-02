@@ -1,25 +1,54 @@
 import React, {Component} from 'react';
-import NavigationBar, {NavItemIcon} from "./navbar.component";
-import {Container, Tab, Tabs} from "react-bootstrap";
-import {Switch,Route} from "react-router-dom";
+import NavigationBar from "./navbar.component";
+import {connect} from 'react-redux';
+import {getIncidentDetails} from "../redux/actions/incidents.action";
 
-const IncidentItem = (props) => {
-    let print = (props) => {
-        console.log(props)
-    };
+//this component is meant to display details of selected incident//
+class IncidentItem extends Component {
 
-    return (
-        <React.Fragment>
-            <NavigationBar />
-            <Container>
-                <h1 className="t-b pt-3 pb-3">Incident Item </h1>
-                <Switch>
-                    <Route path="/incident/:id/details" component={() => <div>Details</div>} />
-                    <Route path="/incident/:id/edit" component={() => <div>Edit</div>} />
-                </Switch>
-            </Container>
-        </React.Fragment>
-    );
-};
+    constructor(props){
+        super(props);
+        this.state = {
+            title: "",
+            status: "",
+            description: ""
+        }
+    }
+    componentDidMount(){
+        this.getIncidentData()
+    }
 
-export default IncidentItem;
+    componentWillReceiveProps(){
+        const fIncident = this.props.foundIncident
+        console.log(fIncident)
+    }
+
+    getIncidentData = () => {
+        const{id} = this.props.match.params;
+        this.props.getIncidentDetails(id);
+        const {foundIncident} = this.props;
+        if(foundIncident){
+            console.log(foundIncident.id);
+            console.log("this is from getdata");
+            this.setState({
+                title: foundIncident.title,
+                status: foundIncident.status,
+                description: foundIncident.description
+            })
+            console.log(this.state)
+        }
+    }
+
+    render(){
+        
+        return(
+            <div>
+                <div className="container">
+                    <div>{this.state.title}</div>
+                </div>
+            </div>
+        )
+    }
+}
+
+export default connect((state => state.incident), {getIncidentDetails}) (IncidentItem);
