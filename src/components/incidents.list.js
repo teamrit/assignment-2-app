@@ -11,6 +11,7 @@ import {IncidentListType} from "./incident.list.type";
 import {IncidentFilter} from "./incident.filter";
 import {IncidentTable} from "./incident.table";
 import IncidentEditForm from "./incidentEditForm.component"
+import Footer from "./footer.component";
 
 class IncidentsList extends Component {
 
@@ -106,6 +107,7 @@ class IncidentsList extends Component {
                         </Tab>
                     </Tabs>
                 </Container>
+                <div className="mb-5"></div>
             </React.Fragment>
         );
     }

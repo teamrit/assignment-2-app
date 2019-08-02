@@ -29,8 +29,8 @@ class UsersList extends Component {
     }
 
     handleInputChange = key => e => {
-        console.log(key,e);
-        this.setState({[key]: e.target.value})
+        console.log(key,e.target.value);
+        this.setState({firstName: e.target.value})
     };
 
     static getDerivedStateFromProps(nextProps, prevState) {
@@ -74,6 +74,7 @@ class UsersList extends Component {
                         </Tab>
                     </Tabs>
                 </Container>
+                <div className="mb-5"></div>
             </React.Fragment>
         );
     }
