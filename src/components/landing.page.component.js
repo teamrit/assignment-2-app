@@ -1,7 +1,8 @@
 import React from 'react';
 import NavigationBar from "./navbar.component";
 import {Jumbotron, Button, Card} from "react-bootstrap";
-
+import Footer from "./footer.component";
+ 
 export const Feature = ({imgSource='',title}) => {
   return (
       <div className="border rounded p-3">
@@ -72,6 +73,7 @@ export const LandingPage = () => {
                     </Card>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 };
