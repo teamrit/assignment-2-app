@@ -18,9 +18,16 @@ class IncidentItem extends Component {
         this.getIncidentData()
     }
 
-    componentWillReceiveProps(){
-        const fIncident = this.props.foundIncident
-        console.log(fIncident)
+    componentWillReceiveProps(next){
+        const foundIncident = this.props.foundIncident
+        console.log(foundIncident)
+
+        if(foundIncident){
+            this.setState({title: foundIncident.title});
+            this.setState({description: foundIncident.description});
+            this.setState({status: foundIncident.status});
+            this.setState({incidentID: foundIncident._id});
+        }
     }
 
     getIncidentData = () => {
@@ -45,6 +52,8 @@ class IncidentItem extends Component {
             <div>
                 <div className="container">
                     <div>{this.state.title}</div>
+                    <div>{this.state.status}</div>
+                    <div>{this.state.description}</div>
                 </div>
             </div>
         )
