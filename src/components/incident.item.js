@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import NavigationBar from "./navbar.component";
+import { Modal, Button } from "react-bootstrap";
 import {connect} from 'react-redux';
 import {getIncidentDetails} from "../redux/actions/incidents.action";
 
@@ -51,9 +52,21 @@ class IncidentItem extends Component {
         return(
             <div>
                 <div className="container">
-                    <div>{this.state.title}</div>
-                    <div>{this.state.status}</div>
-                    <div>{this.state.description}</div>
+                    <Modal.Dialog>
+                        <Modal.Header>
+                            <Modal.Title>Incident Detail</Modal.Title>
+                        </Modal.Header>
+
+                        <Modal.Body>
+                            <p>Title: {this.state.title}</p>
+                            <p>Status: {this.state.status}</p>
+                            <p>Description: {this.state.description}</p>
+                        </Modal.Body>
+
+                        <Modal.Footer>
+                            <Button variant="secondary">Close</Button>
+                        </Modal.Footer>
+                    </Modal.Dialog>
                 </div>
             </div>
         )
