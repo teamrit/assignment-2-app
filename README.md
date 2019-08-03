@@ -14,5 +14,26 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 |                |                                                                     |                    |
 |                |                                                                     |                    |
 
-
+### Home Screen
 ![Image](./screenshots/Index.png)
+
+### Log In
+![Image](./screenshots/logIn.png)
+
+### Sign Up
+![Image](./screenshots/signUP.png)
+
+###  Incident List
+![Image](./screenshots/incidentList.png)
+
+### Create Incident
+![Image](./screenshots/createIncident.png) 
+
+### Incident Details
+![Image](./screenshots/incidentDetails.png) 
+
+### Incident Edit
+![Image](./screenshots/editIncident.png) 
+
+### Users List
+![Image](./screenshots/usersList.png 
