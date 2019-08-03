@@ -43,7 +43,7 @@ const UserProfile = (props) => {
 
                                     <Form.Group>
                                         <Form.Label className="t-b">Email</Form.Label>
-                                        <Form.Control disabled type="input" value={email} placeholder="Enter a title for incident"/>
+                                        <Form.Control type="input" value={email} />
                                     </Form.Group>
                                 </div>
                                 <div className="pt-2">
