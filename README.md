@@ -36,4 +36,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ![Image](./screenshots/editIncident.png) 
 
 ### Users List
-![Image](./screenshots/usersList.png 
+![Image](./screenshots/usersList.png) 
