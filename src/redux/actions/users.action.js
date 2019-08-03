@@ -159,8 +159,8 @@ export function getUsers() {
 export function editUser(newData) {
     return (dispatch, getState) => {
         if (loadUserTokenFromStorage()) {
-            const {_id} = newData;
-            const request = putAuthorized(resolveHost(`/user/${_id}`), getToken(), newData);
+            const {id} = newData;
+            const request = putAuthorized(resolveHost(`/user/${id}`), getToken(), newData);
             request.then(({ data }) => {
                 dispatch({ type: USER.EDIT_PROFILE.SUCCESS, payload: data });
             }).catch(error => {
