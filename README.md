@@ -13,3 +13,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 |Code Splitting                | One of the components is loaded on click, to decrease the initial bundle size |                    |
 |                |                                                                     |                    |
 |                |                                                                     |                    |
+
+
+![Image](.screenshots/homeScreen.xcf)
