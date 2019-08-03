@@ -15,4 +15,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 |                |                                                                     |                    |
 
 
-![Image](.screenshots/homeScreen.xcf)
+![Image](./screenshots/Index.png)
