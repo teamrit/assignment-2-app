@@ -15,7 +15,7 @@ export const Feature = ({imgSource='',title}) => {
 export const LandingPage = () => {
     return (
         <div>
-            <Jumbotron className="mb-0">
+            <Jumbotron fluid className="mb-0">
                 <h1 className="t-b mb-1 text-center">Welcome to Incible!</h1>
                 <p className="text-center">
                     Incident management made easy. <br/>
