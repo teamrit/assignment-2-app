@@ -2,6 +2,9 @@
 .App {
   /*text-align: center;*/
 }
+body {
+  background-color: #5E92BF;
+}
 /*Font*/
 @font-face {
   font-family: Circular;
@@ -59,9 +62,6 @@
 .logo {
   width: 100px;
 }
-.login {
-  min-width: 250px;
-}
 .w-100 {
   width: 100%;
 }
@@ -116,10 +116,36 @@
 }
 
 /*Navigation Bar*/
-.navbar-nav > .nav-link:hover {
-  background-color: #292929;
-  border-radius: 5px;
-  transition: ease-in 100ms;
+.navbar {
+  background-color: #1F3140;
+  font-family: 'Lexend Deca', sans-serif;
+}
+
+.navbar-brand{
+  font-size: 1.8em;
+}
+
+.nav-link, .navbar-brand {
+  color: #7CC2FF;
+  font-size: 1.2em;
+}
+
+.navbar-brand:hover, .nav-link:hover{
+  color: #7CC2FF;
+}
+
+.loginBtn {
+  color: #7CC2FF;
+  background-color: #3E6180;
+  border: #3E6180;
+  width: 150%;
+}
+
+.loginBtn:hover {
+  color: #7CC2FF;
+  background-color: #3E6180;
+  border: #3E6180;
+
 }
 
 .navi:hover {
