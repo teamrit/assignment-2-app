@@ -290,4 +290,17 @@ td a:hover {
   color: #3E6180;
 }
 
+.detail-view {
+  background-color: #3E6180;
+}
+.detail-view a div:first-child {
+  color: #7CC2FF;
+}
+.detail-view h5 div:last-child {
+  color: #1F3140;
+}
+.detail-view p {
+  color: #7CC2FF;
+}
+
 /*# sourceMappingURL=style.css.map */
