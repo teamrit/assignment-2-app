@@ -28,9 +28,9 @@ export class SignIn extends Component {
 
     componentDidMount() {
         loadUserTokenFromStorage();
-        if (this.props.isLoggedIn) {
+        /* if (this.props.isLoggedIn) {
             this.props.history.push("/incidents");
-        }
+        } */
     }
 
     componentWillReceiveProps(nextProps) {
