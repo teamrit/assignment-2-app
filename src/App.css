@@ -1,10 +1,5 @@
 /*Global*/
-.App {
-  /*text-align: center;*/
-}
-body {
-  background-color: #5E92BF;
-}
+
 /*Font*/
 @font-face {
   font-family: Circular;
@@ -12,9 +7,7 @@ body {
   font-weight: 300;
   font-style: normal;
 }
-*,:not(i) {
-  font-family: Circular, Helvetica, Arial, sans-serif;
-}
+
 /*Text*/
 .t-b {
   font-weight: 900;
@@ -23,42 +16,7 @@ body {
   font-weight: 700;
 }
 /*Backgrounds*/
-.bg-eggshell {
-    background-color: #EDEBED;
-}
-.bg-jazz {
-  background-color: #272527;
-}
-.b-none {
-  border: none;
-}
-.bg-hiphop  {
-  background-color: #ee6352;
-  border: none;
-}
-.bg-hiphop:hover , .bg-hiphop:active , .bg-hiphop:focus  {
-  background-color: #8f3a31 !important;
-  border: none;
-}
-.bg-hiphop-faded {
-  background-color: rgba(238,99,82,0.5);
-}
-.card-header {
-  background-color: #7271ff;
-}
-.bg-pop {
-  background-color: #59CD90;
-}
-.bg-pop-faded {
-  background-color: rgb(56, 129, 88);
-}
-.bg-rumble {
-  background-color: #7271ff;
-}
-.bg-ripple {
-  background: url('./Ripple-10s-200px.svg');
-  background-size: cover;
-}
+
 .logo {
   width: 100px;
 }
@@ -101,66 +59,26 @@ body {
 .container input:checked ~ .checkmark {
   background-color: #59CD90;
 }
-.w-logo {
-  width: 40px;
-}
-
 /*For incident form*/
-.incident-form{
-  margin-top: 7vh;
-}
 
 /*React bootstrap tabs custom bg*/
-.nav-item:hover {
-  background-color: #e6e6e6;
-}
+
 
 /*Navigation Bar*/
 
 
-.navi:hover {
-  background-color: #0d0d0d !important;
-  border-radius: 5px;
-  transition: ease-in 100ms;
-}
-.nav-a {
-  border-radius: 5px;
-  background-color: #292929;
-  color: white;
-}
-.dropdown-divider {
-  border-top: 1px solid #a4aeb5;
-}
-.nav.nav-tabs > a[aria-selected=true] {
-  border-top: 2px solid #ee6352;
-}
-#toast {
+
+
+/*#toast {
     position: fixed;
-    top: auto;
+    top: auto;  
     bottom: 0;
     left: 0;
     right: auto;
     z-index: 100;
 }
-.filter-selected {
-  border-top: 4px solid #28a745 !important;
-}
-.a-link {
-  color: #9abde3;
-}
-.a-link:hover {
-  color: #829fbf;
-}
-.pulse-animate {
-  -webkit-animation-name: pulse;
-  animation-name: pulse;
-  -webkit-animation-duration: 2s;
-  animation-duration: 2s;
-  -webkit-animation-timing-function: linear;
-  animation-timing-function: linear;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
-}
+
+
 @-webkit-keyframes pulse {
   0% {
     opacity: 0.3
@@ -186,28 +104,14 @@ body {
   100% {
     opacity: 0.3
   }
-}
+}*/
 
 /*landing page*/
-.feature-card{
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto; 
-  width: 18rem;
-  margin-top: 5%;
-  margin-bottom: 5%; 
-}
 
-.card-block{
-  font-size: 700%;
-}
 
-.reasons-tag{
-  text-decoration: underline;
-}
 
 /*for footer*/
-.footer{
+/*.footer{
   padding: 1%;
   background-color: #343940;
   text-align: center;
@@ -250,3 +154,4 @@ body {
     transform: translateY(0px);
   }
 }
+*/  
